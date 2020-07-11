@@ -20,8 +20,7 @@ router.post('/', function (req, res)
 		var email = req.body.userEmail;
 		var password = req.body.userPassword;
 		var confirm = req.body.confirmPassword;
-		var gender = req.body.Gender;
-		if (!name || !lastname || !email || !password || !confirm || !gender) 
+		if (!name || !lastname || !email || !password || !confirm) 
 		{
 			res.status("400");
 			// res.send("Invalid details!");
@@ -47,9 +46,9 @@ router.post('/', function (req, res)
 						bcrypt.hash(password, saltRound, function (err, hash) 
 						{
     	 		           var sql = "INSERT INTO users\
-    	 		           (name, lastname, email, password, gender) \
+    	 		           (name, lastname, email, password) \
     	 		           VALUES ('" + name + "', '" + lastname + "', '" + email + "',\
-							 '" +hash+ "', '" + gender + "')";
+							 '" +hash+ "')";
 							con.query(sql, (err, result) => {
 									console.log("query");
 									if (err) throw err;

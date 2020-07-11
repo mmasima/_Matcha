@@ -15,8 +15,7 @@ con.connect(function(err){
 				name VARCHAR(255),\
 				lastname VARCHAR(255),\
 				email VARCHAR(255),\
-				password VARCHAR(255), \
-				gender VARCHAR(20))';
+				password VARCHAR(255))';
 	con.query(sql, function(err, result){
 		if (err) throw err;
 		console.log("Table created");
