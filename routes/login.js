@@ -1,15 +1,7 @@
 var express = require("express");
 var router = express.Router();
-var mysql = require("mysql");
+var con = require('../model/connection');
 var bcrypt = require('bcrypt');
-
-/* */
-var con = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: "000000",
-	database: "matcha"
-});
 
 router.post('/',function(req, res){
   if (req.method == "POST")

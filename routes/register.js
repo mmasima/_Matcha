@@ -1,15 +1,8 @@
 var express = require("express");
 var router = express.Router();
-var mysql = require("mysql");
+var con = require('../model/connection');
 var bcrypt = require("bcrypt");
 const saltRound = 10;
-
-var con = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: "000000",
-	database: "matcha"
-});
 
 router.post('/', function (req, res) 
 {
@@ -20,12 +13,11 @@ router.post('/', function (req, res)
 		var email = req.body.userEmail;
 		var password = req.body.userPassword;
 		var confirm = req.body.confirmPassword;
-		if (!name || !lastname || !email || !password || !confirm) 
-		{
+		if (!name || !lastname || !email || !password || !confirm) {
 			res.status("400");
 			// res.send("Invalid details!");
-		}else 
-		{
+		}
+		else {
 			emailExists = false;
 			nameExists = false;
 			var check = "SELECT * FROM users where name ='" + name + "' or email ='" + email + "'";
@@ -58,13 +50,13 @@ router.post('/', function (req, res)
 						});
 					}else{
 						console.log("password not match confirm");
+
 					}
-				}
-				if (nameExists == true) {
-					console.log("name already exists");
 				}
 				if (emailExists == true) {
 					console.log("email exists");
+					"<script>alert('Your password is not strong enough!')</script>";
+					res.redirect('/');
 				}
 				res.render('index');
 		    });

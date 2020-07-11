@@ -1,17 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
+var con = require('../model/connection');
 
 /*get*/
 router.get('/', function(req, res, next){
     res.render('pssword');
-});
-
-var con = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: "000000",
-	database: "matcha"
 });
 
 router.post('/', function(req, res){

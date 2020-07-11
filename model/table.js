@@ -1,12 +1,7 @@
-var mysql = require('mysql');
+var con = require('../model/connection');
 
-var con = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: "000000",
-	database:"Matcha"
-});
 
+//extended users info table
 con.connect(function(err){
 	if (err) throw err;
 	console.log("connected!");
@@ -18,6 +13,16 @@ con.connect(function(err){
 				password VARCHAR(255))';
 	con.query(sql, function(err, result){
 		if (err) throw err;
-		console.log("Table created");
+		console.log("Table users created");
 	});
 });
+
+//extended info table
+var extended = 'CREATE TABLE extendedInfo ( \
+				gender VARCHAR(255),\
+				bio VARCHAR(255))';
+		con.query(extended, function(err, result){
+			if(err) throw err;
+			console.log("Table extended info created");
+
+		})
