@@ -23,7 +23,7 @@ router.post('/', function (req, res)
 		{
 			emailExists = false;
 			usernameExists = false;
-			var check = "SELECT * FROM users where name ='" + name + "' or email ='" + email + "'";
+			var check = "SELECT * FROM users where username ='" + username + "' or email ='" + email + "'";
 			con.query(check, function (err, results) {
 				results.forEach(element => {
 					if (email == element.email) {
