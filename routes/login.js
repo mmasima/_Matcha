@@ -16,21 +16,16 @@ router.post('/',function(req, res){
       var check = `SELECT * FROM users WHERE username='${username}'`
         con.query(check, function (err, results, fields) 
         {
-          console.log('hello');
           bcrypt.compare(password, results[0].password, function(err, result){
-            console.log('hello');
             if (result ==  true)
             {
-              console.log('hello2');
               results.forEach(element =>{
-                console.log('hello3');
                  if (username == element.username){
                   usernameExists = true;
                  }
                 });
                 if (usernameExists == true)
                 {
-                  console.log('hello4');
                   req.session.login = true
                   res.redirect('homepage')
                 }

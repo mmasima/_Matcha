@@ -31,7 +31,8 @@ con.connect(function(err){
 	const interestsSql = `CREATE TABLE IF NOT EXISTS interests(
   							interest_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   							username varchar(50) NOT NULL,
-							 interestName varchar(50))`;
+							 interestName varchar(50))
+							 `;
 	
 	const ImgSql = `CREATE TABLE IF NOT EXISTS image(
   						img_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
