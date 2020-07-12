@@ -33,46 +33,6 @@
         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#accountModal">account settings</button>
     </div>
 
-<!-- Modal for changing account settings-->
-<div class="modal fade" id="accountModal" tab index="-1" role="dialog" aria-labelledby="accountModal" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="account">Account settings</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="firstName">change first name</label>
-              <input type="text"  name="changeFirstName" class="form-control" placeholder="first name">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="LastName">change last</label>
-              <input type="text" class="form-control" name="changeLastName" placeholder="last name">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="">change password</label>
-            <input type="password" class="form-control" name="changePassword" placeholder="enter password">
-          </div>
-          <div class="form-group">
-            <label for="">change email</label>
-            <input type="email" class="form-control" name="changeEmail" placeholder="enter email">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button"  name="changeProfile" class="btn btn-primary">Save changes</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
   <!-- Modal for changing profile -->
   <div class="modal fade" id="profileModal" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -84,7 +44,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form method="POST">
+            <form method="POST" action="/profile">
               <div class="form-row">
                       <div class="form-group col-md-6">
                         <label class="mr-sm-2" for="Preference">Preference</label>
@@ -132,13 +92,13 @@
                         </div>
                         <div class="form-row">
                           <div class="col-7">
-                            <input type="text" class="form-control" placeholder="City">
+                            <input type="text" class="form-control"name="City" placeholder="City">
                           </div>
                           <div class="col">
-                            <input type="text" class="form-control" placeholder="Province">
+                            <input type="text" class="form-control" name="Province" placeholder="Province">
                           </div>
                           <div class="col">
-                            <input type="text" class="form-control" placeholder="Zip">
+                            <input type="text" class="form-control" name="Zip" placeholder="Zip">
                           </div>
                         </div>
                     </div>

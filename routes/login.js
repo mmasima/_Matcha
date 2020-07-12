@@ -6,26 +6,31 @@ var bcrypt = require('bcrypt');
 router.post('/',function(req, res){
   if (req.method == "POST")
   {
-    var email = req.body.userEmail;
+    var username = req.body.username;
     var password = req.body.password;
-    if(!email || !password){
+    if(!username || !password){
       res.status("400");
       res.end();
     }else{
-      emailExists = false;
-      var check = `SELECT * FROM users WHERE email='${email}'`
+      usernameExists = false;
+      var check = `SELECT * FROM users WHERE username='${username}'`
         con.query(check, function (err, results, fields) 
         {
+          console.log('hello');
           bcrypt.compare(password, results[0].password, function(err, result){
+            console.log('hello');
             if (result ==  true)
             {
+              console.log('hello2');
               results.forEach(element =>{
-                 if (email == element.email){
-                  emailExists = true;
+                console.log('hello3');
+                 if (username == element.username){
+                  usernameExists = true;
                  }
                 });
-                if (emailExists == true)
+                if (usernameExists == true)
                 {
+                  console.log('hello4');
                   req.session.login = true
                   res.redirect('homepage')
                 }
