@@ -1,45 +1,47 @@
 var express = require("express");
 var router = express.Router();
-var con = require('../model/connection');
+var mysql = require("mysql");
 var bcrypt = require("bcrypt");
 const saltRound = 10;
+var con = require('../model/connection');
 
 router.post('/', function (req, res) 
 {
     if (req.method == "POST") 
     {
-		var name = req.body.userName;
+		var username = req.body.userName
+		var name = req.body.Name;
 		var lastname = req.body.lastName;
 		var email = req.body.userEmail;
 		var password = req.body.userPassword;
 		var confirm = req.body.confirmPassword;
-		if (!name || !lastname || !email || !password || !confirm) {
+		if (!username || !name || !lastname || !email || !password || !confirm) 
+		{
 			res.status("400");
 			// res.send("Invalid details!");
-		}
-		else {
+		}else 
+		{
 			emailExists = false;
-			nameExists = false;
+			usernameExists = false;
 			var check = "SELECT * FROM users where name ='" + name + "' or email ='" + email + "'";
 			con.query(check, function (err, results) {
 				results.forEach(element => {
 					if (email == element.email) {
 						emailExists = true;
 					}
-					if (name == element.name) {
-						nameExists = true;
-
+					if (username == element.username) {
+						usernameExists = true;
 					}
 				});
-				if (nameExists == false && emailExists == false)
+				if (usernameExists == false && emailExists == false)
 				{ 
 					if (password == confirm)
 					{	
 						bcrypt.hash(password, saltRound, function (err, hash) 
 						{
     	 		           var sql = "INSERT INTO users\
-    	 		           (name, lastname, email, password) \
-    	 		           VALUES ('" + name + "', '" + lastname + "', '" + email + "',\
+    	 		           (username,name, lastname, email, password) \
+    	 		           VALUES ('"+username+"','" + name + "', '" + lastname + "', '" + email + "',\
 							 '" +hash+ "')";
 							con.query(sql, (err, result) => {
 									console.log("query");
@@ -50,13 +52,13 @@ router.post('/', function (req, res)
 						});
 					}else{
 						console.log("password not match confirm");
-
 					}
+				}
+				if (usernameExists == true) {
+					console.log("username already exists");
 				}
 				if (emailExists == true) {
 					console.log("email exists");
-					"<script>alert('Your password is not strong enough!')</script>";
-					res.redirect('/');
 				}
 				res.render('index');
 		    });
