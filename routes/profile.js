@@ -1,24 +1,27 @@
 var express = require('express');
 var router = express.Router();
 var con = require('../model/connection');
+const session = require('express-session');
 
 router.get('/', function(req, res, next){
     res.render('profile');
+    var username = req.session.username;
+    console.log(username);
 });
 // router.post('/routes/profile.js', function (req, res){
-//     // if (req.method == "POST"){
-
-//     //     var age = req.body.age;
-//     //     var gender = req.body.SelectPreference;
-//     //     var art = req.body.art;
-//     //     var goingOut = req.body.goingOut;
-//     //     var sports = req.body.sports;
-//     //     var geek = req.body.geek;
-//     //     var bio = req.body.bio;
-//     //     var image =  req.body.image;
-//     //     var City = req.body.City;
-//     //     var Province = req.body.Province;
-//     //     var Zip =req.body.Zip;
+//     if (req.method == "POST"){
+        
+//         var age = req.body.age;
+//         var gender = req.body.SelectPreference;
+//         var art = req.body.art;
+//         var goingOut = req.body.goingOut;
+//         var sports = req.body.sports;
+//         var geek = req.body.geek;
+//         var bio = req.body.bio;
+//         var image =  req.body.image;
+//         var City = req.body.City;
+//         var Province = req.body.Province;
+//         var Zip =req.body.Zip;
 
 //     //     if(!age || !gender || art || goingOut || sports || geek ||bio
 //     //         || !image || !City || !Province || !Zip){
@@ -38,5 +41,5 @@ router.get('/', function(req, res, next){
 //     //         })
 //     //     }
 //     // }
-// })
+//  });
 module.exports = router;

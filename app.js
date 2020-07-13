@@ -27,7 +27,7 @@ var con = mysql.createConnection({
 
 const sessionFunction = function(req,res, next){
     if (req.session.login){
-      console.log('Welcome back,' + req.session.email+ '!');
+      console.log('Welcome back,' + req.session.username+ '!');
       next()
     }else{
       console.log('please login to view this page');
