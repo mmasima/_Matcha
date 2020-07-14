@@ -19,7 +19,6 @@ con.connect(function(err){
 		password VARCHAR(255))';
 	const profilesql =`CREATE TABLE IF NOT EXISTS profile(
 					profile_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-					username VARCHAR(255),
 					age varchar(255),
 					gender varchar(255),
 					preference varchar(255),

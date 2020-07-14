@@ -1,115 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>matcha</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>matcha</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <a href="homepage" class="navbar-brand">matcha</a>
-        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
-        <span class="navbar-toggler-icon"></span>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a href="homepage" class="navbar-brand">matcha</a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+      <span class="navbar-toggler-icon"></span>
     </button>
-        <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a href="homepage"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#loginModal">home</button></a>
-                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#Modal">logout</button>
-                </li>
-            </ul>
-        </div>
-    </nav>
-     <!-- Button trigger modal for profile-->
-    <div class="updateProfile">
-        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#profileModal">edit profile</button>
-    </div>
-    <!-- Button trigger modal for account settings-->
-
-  <!-- Modal for changing profile -->
-  <div class="modal fade" id="profileModal" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Edit your profile</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+    <div class="collapse navbar-collapse" id="navbarMenu">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a href="homepage"><button type="button" class="btn btn-outline-primary" data-toggle="modal"
+              data-target="#loginModal">
+              home
+            </button></a>
+          <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#Modal">
+            logout
           </button>
-        </div>
-        <div class="modal-body">
-            <form method="POST" action="/profile">
-              <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label class="mr-sm-2" for="Preference">Preference</label>
-                        <select class="custom-select mr-sm-2" name="SelectPreference">
-                          <option selected>Choose...</option>
-                          <option value="1">Men</option>
-                          <option value="2">Women</option>
-                          <option value="3">everyone</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label for="Age">age</label>
-                      <input type="number" class="form-control" name="age" placeholder="enter age">
-                    </div>
-              </div>
-                <label class="mr-sm-2" for="Preference">interests</label>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" name="art">Art and reading
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" name="goingOut">going out
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" name="sports">sports
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input"  name= "geek">geek
-                      </label>
-                    </div>
-                    <br>
-                      <div class="form-group">
-                        <label for="biography">biography</label>
-                        <textarea class="form-control" name="bio" id="biography" rows="4"></textarea>
-                      </div>
-                        <div class="form-group">
-                          <label for="image">add an image of yourself</label>
-                          <input type="file" class="form-control-file" name="image">
-                        </div>
-                        <div class="form-row">
-                          <div class="col-7">
-                            <input type="text" class="form-control"name="City" placeholder="City">
-                          </div>
-                          <div class="col">
-                            <input type="text" class="form-control" name="Province" placeholder="Province">
-                          </div>
-                          <div class="col">
-                            <input type="text" class="form-control" name="Zip" placeholder="Zip">
-                          </div>
-                        </div>
-                    </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" name="saveChanges">Save changes</button>
-        </div>
+        </li>
+      </ul>
     </div>
-  </form>
-  </div>
-  
+  </nav>
+  <div class="card mt-4 ml-5" style="width: 25rem;" >
+    <form method="POST" action="/profile">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label class="mr-sm-2" for="Preference">Preference</label>
+          <select class="custom-select mr-sm-2" name="SelectPreference">
+            <option selected>Choose...</option>
+            <option value="1" name="men">Men</option>
+            <option value="2" name="women">Women</option>
+            <option value="3" name="everyone">everyone</option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="Age">age</label>
+          <input type="number" class="form-control" name="age" placeholder="enter age" />
+        </div>
+      </div>
+      <label class="mr-sm-2" for="Preference">interests</label>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" name="art" />Art and
+          reading
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" name="goingOut" />going out
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" name="sports" />sports
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" name="geek" />geek
+        </label>
+      </div>
+      <br />
+      <div class="form-group">
+        <label for="biography">biography</label>
+        <textarea class="form-control" name="bio" id="biography" rows="4"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="image">add an image of yourself</label>
+        <input type="file" class="form-control-file" name="image" />
+      </div>
+      <div class="form-row">
+        <div class="col-7">
+          <input type="text" class="form-control" name="City" placeholder="City" />
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" name="Province" placeholder="Province" />
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" name="Zip" placeholder="Zip" />
+        </div>
+      </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="submit" class="btn btn-primary" name="saveChanges">
+          Save changes
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>
