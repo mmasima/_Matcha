@@ -10,7 +10,7 @@ var con = mysql.createConnection({
 
 con.connect(function(err){
 	if (err) throw err;
-	const usersql = 'CREATE TABLE users(\
+	const usersql = 'CREATE TABLE IF NOT EXISTS users(\
 		id INT AUTO_INCREMENT PRIMARY KEY, \
 		username VARCHAR(255) ,\
 		name VARCHAR(255),\
@@ -19,25 +19,26 @@ con.connect(function(err){
 		password VARCHAR(255))';
 	const profilesql =`CREATE TABLE IF NOT EXISTS profile(
 					profile_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-					age varchar(255),
+					age int(11),
 					gender varchar(255),
 					preference varchar(255),
 					biography varchar(255),
 					city varchar(255),
 					province varchar(255),
-					zip varchar(255),
+					zip int(11),
 					FOREIGN KEY (profile_id) REFERENCES users(id))`;
 					
 	const interestsSql = `CREATE TABLE IF NOT EXISTS interests(
   							img_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  							username VARCHAR(255),
-							interestName varchar(50),
+							Art int(11),
+							goingOut int(11),
+							sports int(11),
+							geek int(11),
 							FOREIGN KEY (img_id) REFERENCES users(id))
 							`;
 	
 	const ImgSql = `CREATE TABLE IF NOT EXISTS image(
   						img_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  						username VARCHAR(255),
 						imagename varchar(255),
 						FOREIGN KEY (img_id) REFERENCES users(id))`;
 	con.query(

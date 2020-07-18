@@ -32,15 +32,24 @@
     </div>
   </nav>
   <div class="card mt-4 ml-5" style="width: 25rem;" >
-    <form method="POST" action="/profile">
+    <form class="mr-2 ml-2" method="POST" action="/profile">
       <div class="form-row">
+        <div class="form-group col-md-6">
+          <label class="mr-sm-2" for="gender">gender</label>
+          <select class="custom-select mr-sm-2" name="gender">
+            <option selected>Choose...</option>
+            <option value="men" name="men">male</option>
+            <option value="women" name="women">female</option>
+
+          </select>
+        </div>
         <div class="form-group col-md-6">
           <label class="mr-sm-2" for="Preference">Preference</label>
           <select class="custom-select mr-sm-2" name="SelectPreference">
             <option selected>Choose...</option>
-            <option value="1" name="men">Men</option>
-            <option value="2" name="women">Women</option>
-            <option value="3" name="everyone">everyone</option>
+            <option value="men" name="men">Men</option>
+            <option value="women" name="women">Women</option>
+            <option value="everyone" name="everyone">everyone</option>
           </select>
         </div>
         <div class="form-group col-md-6">
@@ -51,23 +60,23 @@
       <label class="mr-sm-2" for="Preference">interests</label>
       <div class="form-check">
         <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" name="art" />Art and
+          <input type="checkbox" class="form-check-input" name="art" value="1"/>Art and
           reading
         </label>
       </div>
       <div class="form-check">
         <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" name="goingOut" />going out
+          <input type="checkbox" class="form-check-input" name="goingOut" value="1"/>going out
         </label>
       </div>
       <div class="form-check">
         <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" name="sports" />sports
+          <input type="checkbox" class="form-check-input" name="sports" value="1"/>sports
         </label>
       </div>
       <div class="form-check">
         <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" name="geek" />geek
+          <input type="checkbox" class="form-check-input" name="geek" value="1" />geek
         </label>
       </div>
       <br />
@@ -87,7 +96,7 @@
           <input type="text" class="form-control" name="Province" placeholder="Province" />
         </div>
         <div class="col">
-          <input type="text" class="form-control" name="Zip" placeholder="Zip" />
+          <input type="number" class="form-control" name="Zip" placeholder="Zip" />
         </div>
       </div>
 

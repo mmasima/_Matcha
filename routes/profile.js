@@ -3,43 +3,52 @@ var router = express.Router();
 var con = require('../model/connection');
 const session = require('express-session');
 
-router.get('/', function(req, res, next){
+router.get('/', function (req, res, next) {
     res.render('profile');
     var username = req.session.username;
-    var id = req.session.GetId;
-    console("here is the id !!  " + id);
 });
 
-router.post('/routes/profile.js', function (req, res){
-    if (req.method == "POST"){
+router.post('/', function (req, res) {
+    var id = req.session.GetId;
+    if (req.method == "POST") {
+        var gender = req.body.gender;
         var age = req.body.age;
-        var gender = req.body.SelectPreference;
+        var preference = req.body.SelectPreference;
         var art = req.body.art;
         var goingOut = req.body.goingOut;
         var sports = req.body.sports;
         var geek = req.body.geek;
         var bio = req.body.bio;
-        var image =  req.body.image;
+        var image = req.body.image;
         var City = req.body.City;
         var Province = req.body.Province;
         var Zip = req.body.Zip;
-        
-        console.log(id);
-        if(!age || !gender || !bio || !City || !Province || !Zip){
+
+
+        if (!age && !gender && !bio && !City && !Province && !Zip) {
+            if (!art || !goingOut || !sports || !geek) {
                 res.status("400");
                 console.log("oops! something went wrong");
+            }
         }
-        else{
+        else {
             var sql = "INSERT INTO profile\ (profile_id, age, gender, preference, biography, city, province, zip) \
-            VALUES ('"+id+"','"+age+"','"+gender+"','"+preference+"', '"+City+"', '"+Province+"', '"+Zip+"',)";
-            con.query(sql, (err, reult) => {
+            VALUES ('"+ id + "','" + age + "','" + gender + "','" + preference + "', '" + bio + "', '" + City + "', '" + Province + "', '" + Zip + "')";
+            con.query(sql, (err, result) => {
                 console.log("profile query");
-                if(err) throw err;
+                if (err) throw err;
                 console.log("inserted profile details");
                 res.end();
+            });
+            var sql = "INSERT INTO interests \ (img_id, Art, goingOut, sports, geek) \
+            VALUES( '"+ id + "', '"+ art + "', '" + goingOut + "', '" + sports + "', '" + geek + "')";
+            con.query(sql, (err, result) => {
+                console.log("interests query submitted");
+                if (err) throw err;
+                console.log("inserted interests details");
             })
         }
     }
- });
+});
 
 module.exports = router;
