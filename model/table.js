@@ -16,7 +16,8 @@ con.connect(function(err){
 		name VARCHAR(255),\
 		lastname VARCHAR(255),\
 		email VARCHAR(255),\
-		password VARCHAR(255))';
+		password VARCHAR(255),\
+		token VARCHAR(255))';
 	const profilesql =`CREATE TABLE IF NOT EXISTS profile(
 					profile_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 					age int(11),

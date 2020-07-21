@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var mysql = require("mysql");
 var bcrypt = require("bcrypt");
+var nodemailer = require("nodemailer");
 const saltRound = 10;
 var con = require('../model/connection');
 
@@ -44,10 +45,33 @@ router.post('/', function (req, res)
     	 		           VALUES ('"+username+"','" + name + "', '" + lastname + "', '" + email + "',\
 							 '" +hash+ "')";
 							con.query(sql, (err, result) => {
-									console.log("query");
-									if (err) throw err;
-									console.log("Inserted")
-									res.end();
+								if (err) throw err;
+								var transporter = nodemailer.createTransport({
+									service: 'gmail',
+									auth: {
+										user: 'phyliciadancer@gmail.com',
+										pass: 'Abcd@1234'
+									},
+									tls: {
+          									 rejectUnauthorized: false
+       									 }
+								});
+			
+								var mailOptions = {
+									from: 'phyliciadancer@gmail.com',
+									to: email,
+									subject: 'Sending Email using Node.js',
+									text: 'That was not that easy!'
+								};
+			
+								transporter.sendMail(mailOptions, function (error, info) {
+									if (error) {
+										console.log("email doesn't exists");
+										console.log(error);
+									} else {
+										console.log('Email sent: ' + info.response);
+									}
+								})
 								});
 						});
 					}else{
@@ -61,6 +85,7 @@ router.post('/', function (req, res)
 					console.log("email exists");
 				}
 				res.render('index');
+				res.end();
 		    });
 		}
     } else 

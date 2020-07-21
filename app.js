@@ -18,12 +18,6 @@ var loginRouter = require('./routes/login');
 let port = 3000;
 var app = express();
 
-var con = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: "000000"
-
-});
 
 const sessionFunction = function(req,res, next){
     if (req.session.login){
@@ -31,6 +25,16 @@ const sessionFunction = function(req,res, next){
       next()
     }else{
       console.log('please login to view this page');
+      res.redirect('/');
+    }
+  }
+
+  const sessionFunctionFgot = function(req,res, next){
+    if (req.session.frgotpsswrd){
+      console.log('Welcome back,' + req.session.email+ '!');
+      next()
+    }else{
+      console.log('please login to view this ');
       res.redirect('/');
     }
   }
@@ -44,8 +48,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
   secret: 'secret',
   resave: false,
