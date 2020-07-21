@@ -26,13 +26,14 @@ router.post('/',function(req, res){
                 });
                 if (usernameExists == true)
                 {
-                  req.session.login = true
+                  req.session.login = true;
+                  req.session.username = username;
                   res.redirect('homepage')
                 }
             }
             if (result == false){
               console.log('incorrect password')
-              res.redirect('index')
+      
             }
            })
         })
