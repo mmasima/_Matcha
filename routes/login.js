@@ -21,13 +21,14 @@ router.post('/',function(req, res){
             {
               results.forEach(element =>{
                  if (username == element.username){
+                  req.session.GetId = results[0].id;
                   usernameExists = true;
                  }
                 });
                 if (usernameExists == true)
                 {
-                  req.session.login = true;
                   req.session.username = username;
+                  req.session.login = true;
                   res.redirect('homepage')
                 }
             }
