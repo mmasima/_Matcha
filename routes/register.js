@@ -3,6 +3,7 @@ var router = express.Router();
 var mysql = require("mysql");
 var bcrypt = require("bcrypt");
 var nodemailer = require("nodemailer");
+var crypto = require('crypto');
 const saltRound = 10;
 var con = require('../model/connection');
 
@@ -40,10 +41,9 @@ router.post('/', function (req, res)
 					{	
 						bcrypt.hash(password, saltRound, function (err, hash) 
 						{
-    	 		           var sql = "INSERT INTO users\
-    	 		           (username,name, lastname, email, password) \
-    	 		           VALUES ('"+username+"','" + name + "', '" + lastname + "', '" + email + "',\
-							 '" +hash+ "')";
+							var token = crypto.randomBytes(64).toString('base64');
+							var sql = `INSERT INTO users (username, name,lastname,email,password,token,verify) 
+							VALUES( '${username}', '${name}','${lastname}' ,'${email}', '${hash}', '${token}','no')`
 							con.query(sql, (err, result) => {
 								if (err) throw err;
 								var transporter = nodemailer.createTransport({
@@ -56,12 +56,16 @@ router.post('/', function (req, res)
           									 rejectUnauthorized: false
        									 }
 								});
+								token = encodeURIComponent(token)
 			
 								var mailOptions = {
 									from: 'phyliciadancer@gmail.com',
 									to: email,
-									subject: 'Sending Email using Node.js',
-									text: 'That was not that easy!'
+									subject: 'ActivateAccount',
+									text: 'That was not that easy!',
+									html:`<p>activate your account</p>
+									<a href = 'http://localhost:3000/activateAccount/?token=${token}'>here</a>`
+
 								};
 			
 								transporter.sendMail(mailOptions, function (error, info) {

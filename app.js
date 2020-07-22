@@ -15,6 +15,7 @@ var homeRouter = require('./routes/homepage');
 var profileRouter = require('./routes/profile');
 var registerRouter = require('./routes/register');
 var loginRouter = require('./routes/login');
+var activateAcc = require('./routes/activateAccount');
 let port = 3000;
 var app = express();
 
@@ -64,6 +65,7 @@ app.use('/profile', sessionFunction, profileRouter);
 app.use('/users', usersRouter);
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
+app.use('/activateAccount', activateAcc);
 //app.post('/frgotpsswrd', frgotpsswrdRouter.frgotpsswrd)
 
 
