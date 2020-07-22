@@ -44,7 +44,8 @@ router.post('/', function(req,res){
           									 rejectUnauthorized: false
        									 }
                   
-								});
+                });
+                token = encodeURIComponent(token)
 			
 								var mailOptions = {
 									from: 'phyliciadancer@gmail.com',
