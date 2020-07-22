@@ -3,10 +3,10 @@ var con = require('./connection');
 let matcha = {};
 
 
-matcha.findUserByTokenAndEmail= function(token,email){
+matcha.findUserByToken= function(token){
     return new Promise((resolve, reject) => {
-		con.query('SELECT * FROM users WHERE token=? AND email=?',
-			[token,email],
+		con.query('SELECT * FROM users WHERE token=?',
+			[token],
 			(error, result) => {
 				if (error) {
 					return reject(error);
@@ -34,4 +34,19 @@ matcha.updateUserPassword = function(password,username){
 
 }
 
+
+matcha.activateAccount = function(token){
+    return new Promise((resolve, reject) => {
+		con.query(`UPDATE users SET verify=?,token='' WHERE token =?`,
+			['yes',token],
+			(error, result) => {
+				if (error) {
+					return reject(error);
+                }
+                console.log(result);
+				return resolve(result);
+			})
+	})
+
+}
 module.exports = matcha;

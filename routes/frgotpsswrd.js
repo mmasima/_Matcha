@@ -21,12 +21,15 @@ router.post('/', function(req,res){
     var check = `SELECT * FROM users where email ='${email}'`;
      con.query(check, function(err, results)
      {
+       var verify
        results.forEach(element =>{
          if (email == element.email){
            emailExist = true;
+           verify = results[0].verify
+          
          }
        });
-       if (emailExist == true){
+       if (emailExist == true && verify == 'yes'){
 
         var token = crypto.randomBytes(64).toString('base64');
         var sql = `UPDATE users SET token ='${token}' where email = '${email}'`;

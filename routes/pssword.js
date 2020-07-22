@@ -12,7 +12,9 @@ router.get('/', function (req, res, next) {
     email = req.query.email;
     token = decodeURIComponent(req.query.token);
     if (email && token) {
-
+        console.log('okay' + req.query.email);
+        console.log('nooo'+req.query.token)
+        console.log(token+'  token')
         res.render('pssword');
     } else {
         res.render('frgotpsswrd');
@@ -23,34 +25,36 @@ router.get('/', function (req, res, next) {
 //console.log('token'+token);
 
 router.post('/', async function (req, res) {
+  
+        var password = req.body.newPassword;
+        var confirm = req.body.confirmPassword;
+        //var email = req.query.email;
+        //var token  = req.query.token;
 
-    var password = req.body.newPassword;
-    var confirm = req.body.confirmPassword;
-
-    if (!password || !confirm) {
-        res.status("400");
-        res.end();
-    } else {
-        if (password === confirm) {
-            try {
-
-
-                let newPassword = await bcrypt.hash(password, saltRound);
-                let user = await db.findUserByTokenAndEmail(token, email);
-                user = user[0]
-                await db.updateUserPassword(newPassword, user.username);
-                res.send('success')
+        if (!password || !confirm) {
+            res.status("400");
+            res.end();
+        } else {
+            if (password === confirm) {
+                try {
+                    console.log(token.trim())
+                
+                    let newPassword = await bcrypt.hash(password, saltRound);
+                    let user = await db.findUserByToken(token);
+                    user = user[0]
+                    await db.updateUserPassword(newPassword, user.username);
+                    res.send('success')
 
 
-            } catch (error) {
-                console.log('error updating password ', error.message)
+                } catch (error) {
+                    console.log('error updating password ',error.message)
 
+                }
+
+            
             }
 
-
         }
-
-    }
 })
 
 
