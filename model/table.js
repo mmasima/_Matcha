@@ -1,4 +1,5 @@
-var  mysql = require('mysql')
+var  mysql = require('mysql');
+const { verify } = require('crypto');
 
 var con = mysql.createConnection({
 	host: "localhost",
@@ -17,7 +18,8 @@ con.connect(function(err){
 		lastname VARCHAR(255),\
 		email VARCHAR(255),\
 		password VARCHAR(255),\
-		token VARCHAR(255))';
+		token VARCHAR(255),\
+		verify VARCHAR(3))';
 	const profilesql =`CREATE TABLE IF NOT EXISTS profile(
 					profile_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 					age int(11),
