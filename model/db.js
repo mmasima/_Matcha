@@ -11,7 +11,7 @@ matcha.findUserByTokenAndEmail= function(token,email){
 				if (error) {
 					return reject(error);
                 }
-                console.log(result[0])
+                console.log(result)
                 return resolve(result);
                 
 			})

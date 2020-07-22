@@ -10,9 +10,9 @@ var token;
 /*get*/
 router.get('/', function (req, res, next) {
     email = req.query.email;
-    token = req.query.token;
+    token = decodeURIComponent(req.query.token);
     if (email && token) {
-        console.log('okay' + req.query.email);
+
         res.render('pssword');
     } else {
         res.render('frgotpsswrd');
@@ -20,37 +20,37 @@ router.get('/', function (req, res, next) {
     res.end();
 });
 
+//console.log('token'+token);
+
 router.post('/', async function (req, res) {
-  
-        var password = req.body.newPassword;
-        var confirm = req.body.confirmPassword;
-        //var email = req.query.email;
-        //var token  = req.query.token;
 
-        if (!password || !confirm) {
-            res.status("400");
-            res.end();
-        } else {
-            if (password === confirm) {
-                try {
-                    console.log(email,token)
-                    //console.log(user.username)
-                    let newPassword = await bcrypt.hash(password, saltRound);
-                    let user = await db.findUserByTokenAndEmail(token,email);
-                    console.log(user)
-                    await db.updateUserPassword(newPassword, user.username);
-                    res.send('success')
+    var password = req.body.newPassword;
+    var confirm = req.body.confirmPassword;
+
+    if (!password || !confirm) {
+        res.status("400");
+        res.end();
+    } else {
+        if (password === confirm) {
+            try {
 
 
-                } catch (error) {
-                    console.log('error updating password ',error.message)
+                let newPassword = await bcrypt.hash(password, saltRound);
+                let user = await db.findUserByTokenAndEmail(token, email);
+                user = user[0]
+                await db.updateUserPassword(newPassword, user.username);
+                res.send('success')
 
-                }
 
-            
+            } catch (error) {
+                console.log('error updating password ', error.message)
+
             }
 
+
         }
+
+    }
 })
 
 
