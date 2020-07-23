@@ -16,11 +16,13 @@ var profileRouter = require('./routes/profile');
 var registerRouter = require('./routes/register');
 var loginRouter = require('./routes/login');
 var activateAcc = require('./routes/activateAccount');
+var updateProfile = require('./routes/updateProfile');
+
 let port = 3000;
 var app = express();
 
 
-const sessionFunction = function(req,res, next){
+const sessionFunction = function(req, res, next){
     if (req.session.login){
       console.log('Welcome back,' + req.session.username+ '!');
       next()
@@ -66,6 +68,7 @@ app.use('/users', usersRouter);
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/activateAccount', activateAcc);
+app.use('/updateProfile', updateProfile);
 //app.post('/frgotpsswrd', frgotpsswrdRouter.frgotpsswrd)
 
 

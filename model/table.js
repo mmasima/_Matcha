@@ -26,9 +26,6 @@ con.connect(function(err){
 					gender varchar(255),
 					preference varchar(255),
 					biography varchar(255),
-					city varchar(255),
-					province varchar(255),
-					zip int(11),
 					FOREIGN KEY (profile_id) REFERENCES users(id))`;
 					
 	const interestsSql = `CREATE TABLE IF NOT EXISTS interests(

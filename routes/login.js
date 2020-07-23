@@ -34,7 +34,7 @@ router.post('/',function(req, res){
                 {
                   req.session.username = username;
                   req.session.login = true;
-                  res.redirect('homepage')
+                  res.redirect('profile')
                   res.end();
                 }else{
                   console.log('activate your account');
