@@ -20,20 +20,17 @@ router.post('/', function (req, res) {
         var geek = req.body.geek;
         var bio = req.body.bio;
         var image = req.body.image;
-        var City = req.body.City;
-        var Province = req.body.Province;
-        var Zip = req.body.Zip;
 
 
-        if (!age && !gender && !bio && !City && !Province && !Zip) {
+        if (!age && !gender && !bio) {
             if (!art || !goingOut || !sports || !geek) {
                 res.status("400");
                 console.log("oops! something went wrong");
             }
         }
         else {
-            var sql = "INSERT INTO profile\ (profile_id, age, gender, preference, biography, city, province, zip) \
-            VALUES ('"+ id + "','" + age + "','" + gender + "','" + preference + "', '" + bio + "', '" + City + "', '" + Province + "', '" + Zip + "')";
+            var sql = "INSERT INTO profile\ (profile_id, age, gender, preference, biography) \
+            VALUES ('"+ id + "','" + age + "','" + gender + "','" + preference + "', '" + bio + "')";
             con.query(sql, (err, result) => {
                 console.log("profile query");
                 if (err) throw err;
@@ -47,8 +44,11 @@ router.post('/', function (req, res) {
                 if (err) throw err;
                 console.log("inserted interests details");
             })
+            res.redirect('homepage')
         }
     }
 });
+
+
 
 module.exports = router;
