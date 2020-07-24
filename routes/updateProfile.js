@@ -19,22 +19,83 @@ router.post('/',  function(req, res){
         var bio = req.body.bio;
         var image = req.body.image;
 
-        if (!age) {
-                console.log(age);
-                res.status("400");
-                console.log("oops! something went wrong");
-        }
-        else{
-            if (age) {
-                console.log(id);
+        // if (age || gender || preference || art || goingOut || geek || sports || bio ) {
+        //         res.status("400");
+        //         console.log("oops! something went wrong");
+        // }
+        // else{
+            if (age != '') {
                 var sql = `UPDATE profile SET age ='${age}' where profile_id = '${id}'`;
                 con.query(sql, (err, result) => {
                     if (err) throw err;
                     console.log(result);
-                    console.log('profileupdate');
+                    console.log('age');
                 })
             };
-        }
+            if (gender != '') {
+                console.log(id);
+                var sql = `UPDATE profile SET gender ='${gender}' where profile_id = '${id}'`;
+                con.query(sql, (err, result) => {
+                    if (err) throw err;
+                    console.log(result);
+                    console.log('gender');
+                })
+            };
+            if (preference != '') {
+                console.log(id);
+                var sql = `UPDATE profile SET preference ='${preference}' where profile_id = '${id}'`;
+                con.query(sql, (err, result) => {
+                    if (err) throw err;
+                    console.log(result);
+                    console.log('preference');
+                })
+            };
+            if (art != '') {
+                console.log(id);
+                var sql = `UPDATE interests SET art ='${art}' where img_id = '${id}'`;
+                con.query(sql, (err, result) => {
+                    if (err) throw err;
+                    console.log(result);
+                    console.log('art');
+                })
+            };
+            if (goingOut != '') {
+                console.log(id);
+                var sql = `UPDATE interests SET goingOut ='${goingOut}' where img_id = '${id}'`;
+                con.query(sql, (err, result) => {
+                    if (err) throw err;
+                    console.log(result);
+                    console.log('goingOut');
+                })
+            };
+            if (geek != '') {
+                console.log(id);
+                var sql = `UPDATE interests SET geek ='${geek}' where img_id = '${id}'`;
+                con.query(sql, (err, result) => {
+                    if (err) throw err;
+                    console.log(result);
+                    console.log('geek');
+                })
+            };
+            if (sports != '') {
+                console.log(id);
+                var sql = `UPDATE interests SET sports ='${sports}' where img_id = '${id}'`;
+                con.query(sql, (err, result) => {
+                    if (err) throw err;
+                    console.log(result);
+                    console.log('sports');
+                })
+            };
+            if (bio != '') {
+                console.log(id);
+                var sql = `UPDATE profile SET biography ='${bio}' where profile_id = '${id}'`;
+                con.query(sql, (err, result) => {
+                    if (err) throw err;
+                    console.log(result);
+                    console.log('bio');
+                })
+            };
+        
 
 })
 module.exports = router;
