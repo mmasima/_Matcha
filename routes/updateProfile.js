@@ -95,6 +95,8 @@ router.post('/',  function(req, res){
                     console.log('bio');
                 })
             };
+            res.redirect('homepage');
+
         
 
 })
