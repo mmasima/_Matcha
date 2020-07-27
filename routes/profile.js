@@ -20,13 +20,12 @@ router.post('/', function (req, res) {
         var image = req.body.image;
         var complete = 'yes';
 
-        if (!age && !gender && !bio) {
-            if (!art || !goingOut || !sports || !geek) {
-                console.log("hello world");
-                console.log(id);
+        if (!age || !gender || !bio || !interests) {
+
                 res.status("400");
+                res.redirect('/')
                 console.log("oops! something went wrong");
-            }
+                console.log("some fields may be missing");
         }
         else {
             var sql = "INSERT INTO profile \ (profile_id, age, gender, preference, biography) \
@@ -52,6 +51,7 @@ router.post('/', function (req, res) {
             })
             res.redirect('homepage')
         }
+        res.redirect('/')
     }
 });
 

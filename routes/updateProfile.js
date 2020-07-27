@@ -16,11 +16,11 @@ router.post('/',  function(req, res){
         var bio = req.body.bio;
         var image = req.body.image;
 
-        // if (age || gender || preference || art || goingOut || geek || sports || bio ) {
-        //         res.status("400");
-        //         console.log("oops! something went wrong");
-        // }
-        // else{
+        if (age == '' && gender == 'choose...' && preference == 'choose...' && interests == '' && bio == '' ) {
+                res.status("400");
+                console.log("oops! something went wrong");
+        }
+        else{
             if (age != '') {
                 var sql = `UPDATE profile SET age ='${age}' where profile_id = '${id}'`;
                 con.query(sql, (err, result) => {
@@ -67,8 +67,10 @@ router.post('/',  function(req, res){
                     console.log('bio');
                 })
             };
+            alert("Hello");
             res.redirect('homepage');
-
+        }
+        res.redirect('homepage');
         
 
 })
