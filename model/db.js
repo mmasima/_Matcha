@@ -49,4 +49,19 @@ matcha.activateAccount = function(token){
 	})
 
 }
+
+matcha.getUsers= function(){
+    return new Promise((resolve, reject) => {
+		con.query('SELECT * FROM users',
+			(error, result) => {
+				if (error) {
+					return reject(error);
+                }
+                console.log(result)
+                return resolve(result);
+                
+			})
+	})
+
+}
 module.exports = matcha;
