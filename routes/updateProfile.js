@@ -12,10 +12,7 @@ router.post('/',  function(req, res){
         var gender = req.body.gender;
         var age = req.body.age;
         var preference = req.body.SelectPreference;
-        var art = req.body.art;
-        var goingOut = req.body.goingOut;
-        var sports = req.body.sports;
-        var geek = req.body.geek;
+        var interests = req.body.interests;
         var bio = req.body.bio;
         var image = req.body.image;
 
@@ -32,7 +29,7 @@ router.post('/',  function(req, res){
                     console.log('age');
                 })
             };
-            if (gender != '') {
+            if (gender != 'Choose...') {
                 console.log(id);
                 var sql = `UPDATE profile SET gender ='${gender}' where profile_id = '${id}'`;
                 con.query(sql, (err, result) => {
@@ -41,7 +38,7 @@ router.post('/',  function(req, res){
                     console.log('gender');
                 })
             };
-            if (preference != '') {
+            if (preference != 'Choose...') {
                 console.log(id);
                 var sql = `UPDATE profile SET preference ='${preference}' where profile_id = '${id}'`;
                 con.query(sql, (err, result) => {
@@ -50,42 +47,17 @@ router.post('/',  function(req, res){
                     console.log('preference');
                 })
             };
-            if (art != '') {
+            if (interests != '') {
                 console.log(id);
-                var sql = `UPDATE interests SET art ='${art}' where img_id = '${id}'`;
+                var sql = `UPDATE interests SET interests ='${interests}' where uid = '${id}'`;
                 con.query(sql, (err, result) => {
                     if (err) throw err;
                     console.log(result);
-                    console.log('art');
+                    console.log('interests updated');
                 })
             };
-            if (goingOut != '') {
-                console.log(id);
-                var sql = `UPDATE interests SET goingOut ='${goingOut}' where img_id = '${id}'`;
-                con.query(sql, (err, result) => {
-                    if (err) throw err;
-                    console.log(result);
-                    console.log('goingOut');
-                })
-            };
-            if (geek != '') {
-                console.log(id);
-                var sql = `UPDATE interests SET geek ='${geek}' where img_id = '${id}'`;
-                con.query(sql, (err, result) => {
-                    if (err) throw err;
-                    console.log(result);
-                    console.log('geek');
-                })
-            };
-            if (sports != '') {
-                console.log(id);
-                var sql = `UPDATE interests SET sports ='${sports}' where img_id = '${id}'`;
-                con.query(sql, (err, result) => {
-                    if (err) throw err;
-                    console.log(result);
-                    console.log('sports');
-                })
-            };
+           
+           
             if (bio != '') {
                 console.log(id);
                 var sql = `UPDATE profile SET biography ='${bio}' where profile_id = '${id}'`;

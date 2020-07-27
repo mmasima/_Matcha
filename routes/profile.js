@@ -15,12 +15,10 @@ router.post('/', function (req, res) {
         var gender = req.body.gender;
         var age = req.body.age;
         var preference = req.body.SelectPreference;
-        var art = req.body.art;
-        var goingOut = req.body.goingOut;
-        var sports = req.body.sports;
-        var geek = req.body.geek;
+       var interests = req.body.interests;
         var bio = req.body.bio;
         var image = req.body.image;
+        var complete = 'yes';
 
         if (!age && !gender && !bio) {
             if (!art || !goingOut || !sports || !geek) {
@@ -31,7 +29,7 @@ router.post('/', function (req, res) {
             }
         }
         else {
-            var sql = "INSERT INTO profile\ (profile_id, age, gender, preference, biography) \
+            var sql = "INSERT INTO profile \ (profile_id, age, gender, preference, biography) \
             VALUES ('"+ id + "','" + age + "','" + gender + "','" + preference + "', '" + bio + "')";
             con.query(sql, (err, result) => {
                 console.log("profile query");
@@ -39,12 +37,18 @@ router.post('/', function (req, res) {
                 console.log("inserted profile details");
                 res.end();
             });
-            var sql = "INSERT INTO interests \ (img_id, Art, goingOut, sports, geek) \
-            VALUES( '"+ id + "', '"+ art + "', '" + goingOut + "', '" + sports + "', '" + geek + "')";
+            var sql = "INSERT INTO interests \ (uid, interests) \
+            VALUES( '"+ id + "', '"+ interests + "')";
             con.query(sql, (err, result) => {
                 console.log("interests query submitted");
                 if (err) throw err;
                 console.log("inserted interests details");
+            })
+            var sql =`UPDATE users SET profile_complete ='${complete}' where id = '${id}'`;
+            con.query(sql, (err, result) => {
+                if (err) throw err;
+                console.log(result);
+                console.log('set profile_complete to yes');
             })
             res.redirect('homepage')
         }
