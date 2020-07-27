@@ -15,7 +15,7 @@ router.post('/', function (req, res) {
         var gender = req.body.gender;
         var age = req.body.age;
         var preference = req.body.SelectPreference;
-       var interests = req.body.interests;
+        var interests = req.body.interests;
         var bio = req.body.bio;
         var image = req.body.image;
         var complete = 'yes';
@@ -38,13 +38,13 @@ router.post('/', function (req, res) {
                 res.end();
             });
             var sql = "INSERT INTO interests \ (uid, interests) \
-            VALUES( '"+ id + "', '"+ interests + "')";
+            VALUES( '"+ id + "', '" + interests + "')";
             con.query(sql, (err, result) => {
                 console.log("interests query submitted");
                 if (err) throw err;
                 console.log("inserted interests details");
             })
-            var sql =`UPDATE users SET profile_complete ='${complete}' where id = '${id}'`;
+            var sql = `UPDATE users SET profile_complete ='${complete}' where id = '${id}'`;
             con.query(sql, (err, result) => {
                 if (err) throw err;
                 console.log(result);
