@@ -7,69 +7,69 @@ router.get('/', function (req, res, next) {
     res.render('updateProfile');
 });
 
-router.post('/',  function(req, res){
-        var id = req.session.GetId;
-        var gender = req.body.gender;
-        var age = req.body.age;
-        var preference = req.body.SelectPreference;
-        var interests = req.body.interests;
-        var bio = req.body.bio;
-        var image = req.body.image;
+router.post('/', function (req, res) {
+    var id = req.session.GetId;
+    var gender = req.body.gender;
+    var age = req.body.age;
+    var preference = req.body.SelectPreference;
+    var interests = req.body.interests;
+    var bio = req.body.bio;
+    var image = req.body.image;
 
-        // if (age || gender || preference || art || goingOut || geek || sports || bio ) {
-        //         res.status("400");
-        //         console.log("oops! something went wrong");
-        // }
-        // else{
-            if (age != '') {
-                var sql = `UPDATE profile SET age ='${age}' where profile_id = '${id}'`;
-                con.query(sql, (err, result) => {
-                    if (err) throw err;
-                    console.log(result);
-                    console.log('age');
-                })
-            };
-            if (gender != 'Choose...') {
-                console.log(id);
-                var sql = `UPDATE profile SET gender ='${gender}' where profile_id = '${id}'`;
-                con.query(sql, (err, result) => {
-                    if (err) throw err;
-                    console.log(result);
-                    console.log('gender');
-                })
-            };
-            if (preference != 'Choose...') {
-                console.log(id);
-                var sql = `UPDATE profile SET preference ='${preference}' where profile_id = '${id}'`;
-                con.query(sql, (err, result) => {
-                    if (err) throw err;
-                    console.log(result);
-                    console.log('preference');
-                })
-            };
-            if (interests != '') {
-                console.log(id);
-                var sql = `UPDATE interests SET interests ='${interests}' where uid = '${id}'`;
-                con.query(sql, (err, result) => {
-                    if (err) throw err;
-                    console.log(result);
-                    console.log('interests updated');
-                })
-            };
-           
-           
-            if (bio != '') {
-                console.log(id);
-                var sql = `UPDATE profile SET biography ='${bio}' where profile_id = '${id}'`;
-                con.query(sql, (err, result) => {
-                    if (err) throw err;
-                    console.log(result);
-                    console.log('bio');
-                })
-            };
-            res.redirect('homepage');
+    // if (age || gender || preference || art || goingOut || geek || sports || bio ) {
+    //         res.status("400");
+    //         console.log("oops! something went wrong");
+    // }
+    // else{
+    if (age != '') {
+        var sql = `UPDATE profile SET age ='${age}' where profile_id = '${id}'`;
+        con.query(sql, (err, result) => {
+            if (err) throw err;
+            console.log(result);
+            console.log('age');
+        })
+    };
+    if (gender != 'Choose...') {
+        console.log(id);
+        var sql = `UPDATE profile SET gender ='${gender}' where profile_id = '${id}'`;
+        con.query(sql, (err, result) => {
+            if (err) throw err;
+            console.log(result);
+            console.log('gender');
+        })
+    };
+    if (preference != 'Choose...') {
+        console.log(id);
+        var sql = `UPDATE profile SET preference ='${preference}' where profile_id = '${id}'`;
+        con.query(sql, (err, result) => {
+            if (err) throw err;
+            console.log(result);
+            console.log('preference');
+        })
+    };
+    if (interests != '') {
+        console.log(id);
+        var sql = `UPDATE interests SET interests ='${interests}' where uid = '${id}'`;
+        con.query(sql, (err, result) => {
+            if (err) throw err;
+            console.log(result);
+            console.log('interests updated');
+        })
+    };
 
-        
+
+    if (bio != '') {
+        console.log(id);
+        var sql = `UPDATE profile SET biography ='${bio}' where profile_id = '${id}'`;
+        con.query(sql, (err, result) => {
+            if (err) throw err;
+            console.log(result);
+            console.log('bio');
+        })
+    };
+    res.redirect('homepage');
+
+
 
 })
 module.exports = router;
