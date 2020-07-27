@@ -18,6 +18,8 @@ var loginRouter = require('./routes/login');
 var activateAcc = require('./routes/activateAccount');
 var updateProfile = require('./routes/updateProfile');
 
+var logoutRouter = require('./routes/logout');
+
 let port = 3000;
 var app = express();
 
@@ -63,12 +65,13 @@ app.use('/', indexRouter);
 app.use('/frgotpsswrd',frgotpsswrdRouter);
 app.use('/pssword', passwordRouter);
 app.use('/homepage', sessionFunction, homeRouter);
-app.use('/profile', sessionFunction, profileRouter);
+app.use('/profile', sessionFunction, profileRouter)
 app.use('/users', usersRouter);
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/activateAccount', activateAcc);
 app.use('/updateProfile', updateProfile);
+app.use('/logout', logoutRouter);
 //app.post('/frgotpsswrd', frgotpsswrdRouter.frgotpsswrd)
 
 

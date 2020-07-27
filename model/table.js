@@ -41,7 +41,7 @@ FOREIGN KEY (profile_id) REFERENCES users(id))`;
 				
 const interestsSql = `CREATE TABLE IF NOT EXISTS interests(\
 uid int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\
-interests varchar(255),\
+interests text(255),\
 FOREIGN KEY (uid) REFERENCES users(id))`;
 
 const ImgSql = `CREATE TABLE IF NOT EXISTS image(\
