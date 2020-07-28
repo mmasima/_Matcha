@@ -43,7 +43,7 @@ router.post('/', async function (req, res) {
                     let user = await db.findUserByToken(token);
                     user = user[0]
                     await db.updateUserPassword(newPassword, user.username);
-                    res.send('success')
+                    res.redirect('/');
 
 
                 } catch (error) {
