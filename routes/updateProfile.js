@@ -67,7 +67,6 @@ router.post('/',  function(req, res){
                     console.log('bio');
                 })
             };
-            alert("Hello");
             res.redirect('homepage');
         }
         res.redirect('homepage');

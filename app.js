@@ -70,7 +70,7 @@ app.use('/users', usersRouter);
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/activateAccount', activateAcc);
-app.use('/updateProfile', updateProfile);
+app.use('/updateProfile',sessionFunction, updateProfile);
 app.use('/logout', logoutRouter);
 //app.post('/frgotpsswrd', frgotpsswrdRouter.frgotpsswrd)
 
