@@ -50,7 +50,7 @@ matcha.activateAccount = function(token){
 
 }
 
-matcha.getUsers = function (gender, preference, city, commontag, famerating) {
+matcha.getUsers = function (gender, preference, city, commontag) {
 
 	return new Promise((resolve, reject) => {
 		var tagetgender
@@ -65,8 +65,8 @@ matcha.getUsers = function (gender, preference, city, commontag, famerating) {
 		con.query('SELECT username,gender, biography, city, profileimage FROM users AS u \
 			INNER JOIN profile AS p ON u.id = p.profile_id INNER JOIN image AS i ON p.profile_id = i.img_id \
 			INNER JOIN interests AS n ON i.img_id = n.uid\
-			WHERE gender=? AND preference=? AND city=? AND interests=? AND famerating=?',
-			[tagetgender, gender, city, commontag, famerating],
+			WHERE gender=? AND preference=? AND city=? AND interests=?',
+			[tagetgender, gender, city, commontag],
 			(error, result) => {
 				if (error) {
 					return reject(error);
