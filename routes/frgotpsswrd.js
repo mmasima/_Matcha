@@ -55,7 +55,8 @@ router.post('/', function(req,res){
 									to: email,
 									subject: 'forgot Password',
                   text:`To reset your password, please click the link below.`,
-                  html:`<a href = 'http://localhost:3000/pssword?token=${token}&email=${email}'>here</a>`
+                  html:`<p>change your password</p>
+									<a href = 'http://localhost:3000/pssword?token=${token}&email=${email}'>here</a>`
 								};
 			
 								transporter.sendMail(mailOptions, function (error, info) {

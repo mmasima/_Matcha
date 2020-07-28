@@ -2,6 +2,46 @@ var con = require('./connection');
 
 let matcha = {};
 
+matcha.usernameV = function(username) {
+  const validUserPattern = /(?=^.{2,50}$)(?=.*[a-z]).*$/;
+  return username.match(validUserPattern);
+};
+
+matcha.emailV = (email) => {
+  const validEmailPattern = /[\w-]+@([\w-]+\.)+[\w-]+/;
+  return email.match(validEmailPattern);
+};
+
+matcha.passwordV = (password) => {
+  const validPassPattern = /(?=^.{6,100}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$/;
+  return password.match(validPassPattern);
+};
+
+matcha.firstNameV = (name) => {
+  const validNamePattern = /(?=^.{2,50}$)^[A-Za-z]+$/;
+  return name.match(validNamePattern);
+};
+
+matcha.lastNameV = (name) => {
+  const validNamePattern = /(?=^.{2,50}$)^[A-Za-z]+$/;
+  return name.match(validNamePattern);
+};
+
+matcha.checkEmailAndUserNameExist= function(username, email){
+    return new Promise((resolve, reject) => {
+		con.query('SELECT * FROM users WHERE username=? OR email=?',
+			[username, email],
+			(error, result) => {
+				if (error) {
+					return reject(error);
+                }
+                console.log(result)
+                return resolve(result);
+                
+			})
+	})
+
+}
 
 matcha.findUserByToken= function(token){
     return new Promise((resolve, reject) => {
