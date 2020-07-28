@@ -37,6 +37,7 @@ city varchar(255),\
 region varchar(255),\
 latitude double,\
 longitude double,\
+famerating int(3) default 5,\
 FOREIGN KEY (profile_id) REFERENCES users(id))`;
 				
 const interestsSql = `CREATE TABLE IF NOT EXISTS interests(\
