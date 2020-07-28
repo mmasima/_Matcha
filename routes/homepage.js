@@ -5,13 +5,15 @@ var con = require('../model/connection');
 var db = require('../model/db');
 
 /*Get*/
-router.get('/', function (req, res, next) {
-    con.query('SELECT username,gender, biography, city, profileimage FROM users AS u \
-    INNER JOIN profile AS p ON u.id = p.profile_id INNER JOIN image AS i ON p.profile_id = i.img_id', function (err, data) {
-        if (err) throw err;
-        
+router.get('/', async function (req, res, next) {
+    try {
+        let data = await db.getUsers('Male','Female', 'Randburg', '#gaming',5);
+        console.log(data)
         res.render('homepage', {userdata: data})
-    })
+        
+    } catch (error) {
+        console.log('error updating profile ',error.message)
+    }
 });
 
 module.exports = router;
