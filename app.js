@@ -6,7 +6,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var session = require('express-session');
-
+var flash = require('connect-flash');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var frgotpsswrdRouter = require('./routes/frgotpsswrd');
@@ -55,11 +55,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(session({
   secret: 'secret',
   resave: false,
+  cookie: {maxAge: 60000},
   saveUninitialized: true
-})) 
+}));
+app.use(flash());
 
 app.use('/', indexRouter);
 app.use('/frgotpsswrd',frgotpsswrdRouter);

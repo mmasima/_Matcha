@@ -2,9 +2,10 @@ var express = require("express");
 var router = express.Router();
 var con = require('../model/connection');
 const session = require('express-session');
+const { response } = require("../app");
 
 router.get('/', function (req, res, next) {
-    res.render('updateProfile');
+    res.render('updateProfile', {message: flash('message')});
 });
 
 router.post('/',  function(req, res){
@@ -19,6 +20,8 @@ router.post('/',  function(req, res){
         if (age == '' && gender == 'choose...' && preference == 'choose...' && interests == '' && bio == '' ) {
                 res.status("400");
                 console.log("oops! something went wrong");
+                req.flash('message', 'nothing was changed!');
+                res.redirect('updateProfile');
         }
         else{
             if (age != '') {
