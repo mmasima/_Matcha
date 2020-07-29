@@ -90,7 +90,7 @@ matcha.activateAccount = function(token){
 
 }
 
-matcha.getUsers = function (gender, preference, city, commontagfamerating) {
+matcha.getUsers = function (gender, preference, city, commontag, famerating) {
 
 	return new Promise((resolve, reject) => {
 		var tagetgender
