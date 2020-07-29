@@ -11,7 +11,7 @@ router.get('/', async function (req, res, next) {
          let user = await db.findUserByToken(token);
          user = user[0];
          await db.activateAccount(user.token);
-         res.render('index')
+         res.render('login')
      }
     res.end();
 });

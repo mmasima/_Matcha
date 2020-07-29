@@ -1,129 +1,108 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>matcha</title>
-    <link rel="stylesheet" href="stylesheets/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script>
-      window.alert(" Welcome to Matcha , please Login or Register to view more");
-  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>matcha</title>
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <!-- <script>
+    window.alert(" Welcome to Matcha , please Login or Register to view more");
+  </script> -->
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <a href="#" class="navbar-brand">matcha</a>
-        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
-        <span class="navbar-toggler-icon"></span>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a href="#" class="navbar-brand">matcha</a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+      <span class="navbar-toggler-icon"></span>
     </button>
-        <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#loginModal">login</button>
-                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#Modal">register</button>
-                </li>
-            </ul>
-        </div>
-    </nav>
-  <!-- Login Modal -->
-  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="LoginModal" aria-hidden="true">
-    <div class="modal-dialog" rle="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Login</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form action="/login" method="POST">
-                <div class="form-group">
-                  <labelX>username</labelX>
-                  <input type="text" class="form-control" id="username" aria-describedby="emailHelp" name="username" placeholder="Enter username" required>
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="confirmPassword" name ="password" placeholder="Password" required>
-                </div>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"><a href= "frgotpsswrd">forgot password</a></button>
-                <button type="submit" class="btn btn-primary">login</button>
-              </div>  
-            </form>
-          </div>
-        </div>
-     </div>
-    <div class="registerButton">
-        <div class="Intro">
-        <!-- Button trigger modal -->
-            <h2>FIND YOUR PERFECT MATCH</h2>
-        </div>
-        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#Modal">register</button>
+    <div class="collapse navbar-collapse" id="navbarMenu">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a href="login"><button type="button" class="btn btn-outline-primary">login</button></a>
+        </li>
+      </ul>
     </div>
-  <!-- Modal -->
-  <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Register Details</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form action ="/register" method="POST" >
-              <div class="form-group row">
-                <label for="userName" class="col-sm-2 col-form-label">username</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="userName" name ="userName" placeholder="enter username" required>
+  </nav>
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">
+      find your perfect match!
+    </h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-5">
+        <div class="card text-white bg-dark mb-3">
+          <div class="card-body">
+            <div class="text-center mb-3">
+              <h4>
+                Register below
+              </h4>
+            </div>
+            <form action="/" method="POST">
+              <div class="form-group row mt-5">
+                <div class="col-sm-10 col-lg-10">
+                  <label for="userName">username</label>
+                  <input type="text" class="form-control" id="userName" name="userName" placeholder="enter username"
+                    required>
                 </div>
               </div>
-                <div class="form-group row">
-                  <label for="userName" class="col-sm-2 col-form-label">Name</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="Name" name ="Name" placeholder="enter name" required>
-                  </div>
+              <div class="form-group row">
+                <div class="col-sm-10 col-lg-10">
+                  <label for="userName" >Name</label>
+                  <input type="text" class="form-control" id="Name" name="Name" placeholder="enter name" required>
                 </div>
-                <div class="form-group row">
-                  <label for="UserLastName" class="col-sm-2 col-form-label" >lastname</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="lastName" placeholder="enter last name" name = "lastName" required>
-                  </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-10 col-lg-10">
+                  <label for="UserLastName">lastname</label>
+                  <input type="text" class="form-control" id="lastName" placeholder="enter last name" name="lastName"
+                    required>
                 </div>
-                <div class="form-group row">
-                    <label for="UserEmail" class="col-sm-2 col-form-label">email</label>
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="userEmail" placeholder="enter email" name = "userEmail" required>
-                    </div>
-                  </div>
-                <div class="form-group row">
-                    <label for="Password" class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-10">
-                      <input type="password" class="form-control" id="Password" placeholder="enter Password" name ="userPassword" minlength="6"
-                                title="Must have digits, caps and small letters" pattern="(?=\S*\d)(?=\S*[a-z])(?=\S*[A-Z])\S*" require >
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="confirmPassword" class="col-sm-2 col-form-label">confirm</label>
-                    <div class="col-sm-10">
-                      <input type="password" class="form-control" id="confirmPassword" placeholder="Re-enter Password" name ="confirmPassword" required>
-                    </div>
-                  </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-10 col-lg-10">
+                  <label for="UserEmail">email</label>
+                  <input type="email" class="form-control" id="userEmail" placeholder="enter email" name="userEmail"
+                    required>
+                </div>
+              </div>
+              <div class="form-group row">
+                
+                <div class="col-sm-10 col-lg-6">
+                  <label for="Password">Password</label>
+                  <input type="password" class="form-control" id="Password" placeholder="enter Password"
+                    name="userPassword" minlength="6" title="Must have digits, caps and small letters"
+                    pattern="(?=\S*\d)(?=\S*[a-z])(?=\S*[A-Z])\S*" require>
+                </div>
+                <div class="col-sm-10 col-lg-6">
+                  <label for="confirmPassword">confirm</label>
+                  <input type="password" class="form-control" id="confirmPassword" placeholder="Re-enter Password"
+                    name="confirmPassword" required>
+                </div>
+              </div>
+              <div class="form-group row">
+               
+              </div>
+          </div>
           <button type="submit" class="btn btn-primary">Register!</button>
+          </form>
         </div>
-      </form>
       </div>
     </div>
   </div>
-</div>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>

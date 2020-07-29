@@ -3,6 +3,11 @@ var router = express.Router();
 var con = require('../model/connection');
 var bcrypt = require('bcrypt');
 
+  
+router.get('/', function(req, res, next) {
+  res.render('login')
+});
+
 router.post('/', function (req, res) {
   if (req.method == "POST") {
     var username = req.body.username;

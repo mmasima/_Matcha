@@ -13,7 +13,6 @@ var frgotpsswrdRouter = require('./routes/frgotpsswrd');
 var passwordRouter = require('./routes/pssword');
 var homeRouter = require('./routes/homepage');
 var profileRouter = require('./routes/profile');
-var registerRouter = require('./routes/register');
 var loginRouter = require('./routes/login');
 var activateAcc = require('./routes/activateAccount');
 var updateProfile = require('./routes/updateProfile');
@@ -45,7 +44,6 @@ const sessionFunction = function(req, res, next){
   }
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
@@ -61,13 +59,14 @@ app.use(session({
   saveUninitialized: true
 })) 
 
+app.use(express.static(__dirname + '/views'));
+app.use(express.static(__dirname + '/public/'));
 app.use('/', indexRouter);
 app.use('/frgotpsswrd',frgotpsswrdRouter);
 app.use('/pssword', passwordRouter);
 app.use('/homepage', sessionFunction, homeRouter);
 app.use('/profile', sessionFunction, profileRouter)
 app.use('/users', usersRouter);
-app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/activateAccount', activateAcc);
 app.use('/updateProfile',sessionFunction, updateProfile);
