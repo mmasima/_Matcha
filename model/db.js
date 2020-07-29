@@ -120,4 +120,72 @@ matcha.getUsers = function (gender, preference, city, commontag, famerating) {
 	})
 
 }
+
+
+matcha.insertPicture = function(id, profileimage){
+    return new Promise((resolve, reject) => {
+		con.query('INSERT INTO image (img_id, profileimage)  VALUES(?,?)',
+			[id, profileimage],
+			(error, result) => {
+				if (error) {
+					return reject(error);
+                }
+                console.log(result)
+                return resolve(result);
+                
+			})
+	})
+
+}
+
+
+
+matcha.updateProfileComplete = function(complete, id){
+    return new Promise((resolve, reject) => {
+		con.query(`UPDATE users SET profile_complete =? where id =?`,
+			[complete,id],
+			(error, result) => {
+				if (error) {
+					return reject(error);
+                }
+                console.log(result);
+				return resolve(result);
+			})
+	})
+
+}
+
+
+matcha.insertInterests = function(id, interests){
+    return new Promise((resolve, reject) => {
+		con.query('INSERT INTO interests (uid, interests)  VALUES(?,?)',
+			[id, interests],
+			(error, result) => {
+				if (error) {
+					return reject(error);
+                }
+                console.log(result)
+                return resolve(result);
+                
+			})
+	})
+
+}
+
+matcha.insertProfile = function(id, age, gender, preference, bio){
+    return new Promise((resolve, reject) => {
+		con.query('INSERT INTO profile (profile_id, age, gender, preference, biography) VALUES(?,?,?,?,?)',
+			[id, age, gender, preference, bio],
+			(error, result) => {
+				if (error) {
+					return reject(error);
+                }
+                console.log(result)
+                return resolve(result);
+                
+			})
+	})
+
+}
+
 module.exports = matcha;
