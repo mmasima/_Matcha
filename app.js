@@ -6,6 +6,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var session = require('express-session');
+var flash = require('connect-flash');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -57,7 +58,8 @@ app.use(session({
   secret: 'secret',
   resave: false,
   saveUninitialized: true
-})) 
+}));
+app.use(flash());
 
 app.use(express.static(__dirname + '/views'));
 app.use(express.static(__dirname + '/public/'));

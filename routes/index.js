@@ -10,11 +10,10 @@ var db = require('../model/db');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-	res.render('index');
+	res.render('index', { message: req.flash('message') });
 });
 
 router.post('/', async function (req, res) {
-	console.log('hello');
 	var username = req.body.userName
 	var name = req.body.Name;
 	var lastname = req.body.lastName;
@@ -23,6 +22,8 @@ router.post('/', async function (req, res) {
 	var confirm = req.body.confirmPassword;
 	if (!username || !name || !lastname || !email || !password || !confirm) {
 		console.log('empty')
+		req.flash('message', 'empty form!');
+		res.redirect('index');
 		res.end();
 	} else {
 		if (db.usernameV(username) && db.passwordV(password) && db.emailV(email) && db.firstNameV(name) && db.lastNameV(lastname)) {
@@ -70,9 +71,12 @@ router.post('/', async function (req, res) {
 							transporter.sendMail(mailOptions, function (error, info) {
 								if (error) {
 									console.log("email doesn't exists");
+									req.flash('message', 'email doesnt exists');
+									res.redirect('/');
 									console.log(error);
 								} else {
 									console.log('Email sent: ' + info.response);
+									res.redirect('/');
 								}
 							})
 						});
@@ -80,15 +84,21 @@ router.post('/', async function (req, res) {
 
 				} else {
 					console.log("password not match confirm");
+					req.flash('message', 'passwords do not match confirm');
+					res.redirect('index');
 					res.end()
 				}
 			}
 			if (usernameExists == true) {
 				console.log("username already exists");
+				req.flash('message', 'username already exists');
+				res.redirect('/');
 				res.end()
 			}
 			if (emailExists == true) {
 				console.log("email exists");
+				req.flash('message', 'email exists');
+				res.redirect('/');
 				res.end
 			}
 			res.render('index');
@@ -96,19 +106,29 @@ router.post('/', async function (req, res) {
 		} else {
 			if (!db.usernameV(username)) {
 				console.log('your username need to be 2 - 20 haracters long and contain at least one lower case alphabet')
+				req.flash('message', 'your username need to be 2 - 20 haracters long and contain at least one lower case alphabet');
+				res.redirect('/');
 				res.end();
 			} else if (!db.emailV(email)) {
 				console.log('your email needs to be in this format: user@mail.domain')
+				req.flash('message', 'your email needs to be in this format: user@mail.domain');
+				res.redirect('/');
 				res.end();
 			} else if (!db.passwordV(password)) {
 				console.log('a password must contain lower and upper case characters, digit(s), and special character(s)');
+				req.flash('message', 'a password must contain lower and upper case characters, digit(s), and special character(s)');
+				res.redirect('/');
 				res.end();
 			} else if (!db.lastNameV(lastname)) {
-				console.log('your firstname need to be 2 - 20 haracters long and contain at least one lower case alphabet')
+				console.log('your firstname need to be 2 - 20 characters long and contain at least one lower case alphabet')
+				req.flash('message', 'your lastname need to be 2 - 20 characters long and contain at least one lower case alphabet');
+				res.redirect('/');
 
 				res.end();
 			} else if (!db.firstNameV(name)) {
 				console.log('your lastname need to be 2 - 20 haracters long and contain at least one lower case alphabet')
+				req.flash('message', 'your lastname need to be 2 - 20 characters long and contain at least one lower case alphabet');
+				res.redirect('/');
 				res.end();
 			}
 		}

@@ -28,6 +28,12 @@
       </ul>
     </div>
   </nav>
+  <%if(message.length > 0) {%>
+    <div class="alert alert-danger" role="alert">
+        <%= message %>
+    </div>
+<%}%>
+
   <div class="container mt-4">
     <h2 class="text-center text-white mb-4">
       find your perfect match!

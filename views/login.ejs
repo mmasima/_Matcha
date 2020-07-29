@@ -27,17 +27,21 @@
             </ul>
         </div>
     </nav>
+    <%if(message.length > 0) {%>
+        <div class="alert alert-danger" role="alert">
+            <%= message %>
+        </div>
+    <%}%>
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-lg-5">
-                
+            <div class="col-lg-5">               
                 <div class="card bg-dark">
                     <div class="card-body text-white">
                         <h3 class="text-center white">
                             login below
                         </h3>
                         <form action="/login" method="POST">
-                            <div class="form-group">
+                            <div class="form-group">                             
                                 <labelX>username</labelX>
                                 <input type="text" class="form-control" id="username" aria-describedby="emailHelp"
                                     name="username" placeholder="Enter username" required />
