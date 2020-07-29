@@ -6,7 +6,7 @@ var nodemailer = require("nodemailer");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('frgotpsswrd');
+  res.render('frgotpsswrd', { message: req.flash('message') });
 });
 
 router.post('/', function(req,res){
@@ -14,6 +14,8 @@ router.post('/', function(req,res){
   if (!email)
   {
     res.status("400");
+    req.flash('message', 'an error occured');
+    res.redirect('/frgotpsswrd');
     res.end();
   }
   else{
@@ -71,6 +73,8 @@ router.post('/', function(req,res){
               })
        }else{
          console.log("Email doesn't exist")
+         req.flash('message', 'Email doesnt exist');
+         res.redirect('/frgotpsswrd');
         }
          res.redirect('frgotpsswrd');
          res.end();
