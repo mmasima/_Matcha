@@ -10,7 +10,10 @@ var db = require('../model/db');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-	res.render('index', { message: req.flash('message') });
+	res.render('index', { 
+		message: req.flash('message'),
+		success: req.flash('success'),
+	});
 });
 
 router.post('/', async function (req, res) {
@@ -75,12 +78,14 @@ router.post('/', async function (req, res) {
 									res.redirect('/');
 									console.log(error);
 								} else {
+								
 									console.log('Email sent: ' + info.response);
-									res.redirect('/');
 								}
 							})
 						});
 					});
+					req.flash('success', 'A confirmation email has been sent to you!');
+					res.redirect('/');
 
 				} else {
 					console.log("password not match confirm");

@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var con = require('../model/connection');
 var bcrypt = require('bcrypt');
+const e = require("express");
 
 
 router.get('/', function (req, res, next) {
@@ -24,8 +25,12 @@ router.post('/', function (req, res) {
       var check = `SELECT * FROM users WHERE username='${username}'`
       con.query(check, function (err, results, fields) {
         if (err) throw err;
-        else {
-          console.log(password);
+        console.log(results);
+        if(results == '') {
+          req.flash('message', 'username does not exist');
+          res.redirect('login');
+        }
+        else{
           bcrypt.compare(password, results[0].password, function (err, result) {
             if (result == true) {
               var verify;

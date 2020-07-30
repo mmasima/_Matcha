@@ -33,6 +33,11 @@
         <%= message %>
     </div>
 <%}%>
+<%if(success.length > 0) {%>
+  <div class="alert alert-success" role="alert">
+    <%= success %>
+  </div>
+  <%}%>
 
   <div class="container mt-4">
     <h2 class="text-center text-white mb-4">
