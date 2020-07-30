@@ -4,7 +4,10 @@ var con = require('../model/connection');
 const session = require('express-session');
 
 router.get('/', function (req, res, next) {
-    res.render('updateProfile');
+    res.render('updateProfile', {
+        message: req.flash('message'),
+        success: req.flash('success'),
+     });
 });
 
 router.post('/',  function(req, res){
@@ -15,9 +18,17 @@ router.post('/',  function(req, res){
         var interests = req.body.interests;
         var bio = req.body.bio;
         var image = req.body.image;
-
-        if (age == '' && gender == 'choose...' && preference == 'choose...' && interests == '' && bio == '' ) {
+        var minAge = 18;
+        
+        if( minAge > parseInt(age) ){
+            console.log('hello world!!');
+            req.flash('message', 'You have to be over 18');
+            res.redirect('profile');
+        }
+        if (age == '' && gender == 'Choose...' && preference == 'Choose...' && interests == '' && bio == '' ) {
                 res.status("400");
+                req.flash('message', 'you havent changed anything!');
+                res.redirect('updateProfile');
                 console.log("oops! something went wrong");
         }
         else{
@@ -67,9 +78,10 @@ router.post('/',  function(req, res){
                     console.log('bio');
                 })
             };
-            res.redirect('homepage');
+            req.flash('success', 'Profile changed!');
+            res.redirect('updateProfile');
         }
-        res.redirect('homepage');
+        res.redirect('updateProfile');
         
 
 })

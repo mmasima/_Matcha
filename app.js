@@ -30,7 +30,8 @@ const sessionFunction = function(req, res, next){
       next()
     }else{
       console.log('please login to view this page');
-      res.redirect('/');
+      req.flash('message', 'please login to view this page');
+      res.redirect('login');
     }
   }
 
@@ -40,7 +41,8 @@ const sessionFunction = function(req, res, next){
       next()
     }else{
       console.log('please login to view this ');
-      res.redirect('/');
+      req.flash('message', 'please login to view this page');
+      res.redirect('login');
     }
   }
 
