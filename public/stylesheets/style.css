@@ -1,5 +1,6 @@
 body{
-  background-image: url(/images/webImage.jpg);
+  background: linear-gradient(rgba(83, 88, 88, 0.7), rgba(74, 79, 79, 0.7)),
+  url("../images/webImage.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;

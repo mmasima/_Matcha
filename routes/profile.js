@@ -2,15 +2,12 @@ var express = require('express');
 var router = express.Router();
 var con = require('../model/connection');
 const session = require('express-session');
-var db = require('../model/db');
-var upload = require('../logic/uploadImage');
-var multer = require("multer");
-
 
 router.get('/', function (req, res, next) {
-    res.render('profile');
+    res.render('profile', { message: req.flash('message') });
     var username = req.session.username;
 });
+
 
 router.post('/', async function (req, res) {
 
@@ -66,12 +63,8 @@ router.post('/', async function (req, res) {
         })
     } catch (error) {
         console.log(error)
-
-        //    }
-
     }
-    //res.redirect('/')
-
+        res.redirect('/')
 });
 
 module.exports = router;

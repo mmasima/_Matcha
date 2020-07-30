@@ -1,10 +1,8 @@
 var multer = require("multer");
 
-
-
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, './public/user_images');
+        cb(null, '../public/user_images');
     },
     filename: (req, file, cb) => {
         cb(null, file.originalname.replace(/^(.*?)((?:\.\w+)+)$/, `$1-${Date.now()}$2`));
@@ -27,4 +25,3 @@ const upload = multer({
     fileFilter: fileFilter,
 }).single('image');
 
-module.exports = upload
