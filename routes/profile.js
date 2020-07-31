@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var con = require('../model/connection');
 const session = require('express-session');
+var upload = require('../logic/uploadImage')
+var multer = require("multer");
+var db = require('../model/db')
+
 
 router.get('/', function (req, res, next) {
     res.render('profile', { message: req.flash('message') });
@@ -39,7 +43,8 @@ router.post('/', async function (req, res) {
             var preference = req.body.SelectPreference;
             var interests = req.body.interests;
             var bio = req.body.bio;
-            var image = req.body.image;
+            var city = req.body.city;
+            //var profileimage = req.body.image;
             var complete = 'yes';
 
             if (err instanceof multer.MulterError) {
@@ -54,17 +59,20 @@ router.post('/', async function (req, res) {
             } else {
                 var profileimage = req.file;
                 console.log(profileimage);
-                var sql = await db.insertProfile(id, age, gender, preference, bio);
+                var sql = await db.insertProfile(id, age, gender, preference, bio, city);
                 var insertInterests = await db.insertInterests(id, interests)
                 var profilecomplete = await db.updateProfileComplete(complete, id);
-                await db.insertPicture(id, profileimage.filename);
+                await db.insertPicture(id, profileimage);
                 res.redirect('homepage')
             }
         })
     } catch (error) {
-        console.log(error)
+        console.log("error profile ", error.message);
+        req.flash("message", "error profile");
+        res.redirect('profile');
+
     }
-        res.redirect('/')
+    
 });
 
 module.exports = router;
