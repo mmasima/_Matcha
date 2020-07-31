@@ -183,7 +183,7 @@ matcha.getProfile = (id) => {
 	})
 }
 
-matcha.getUsers = function (gender, preference, city, commontag, famerating) {
+matcha.getUsers = function (gender, preference, city, interests, famerating) {
 
 	return new Promise((resolve, reject) => {
 		var tagetgender
@@ -199,14 +199,14 @@ matcha.getUsers = function (gender, preference, city, commontag, famerating) {
 			INNER JOIN profile AS p ON u.id = p.profile_id INNER JOIN image AS i ON p.profile_id = i.img_id \
 			INNER JOIN interests AS n ON i.img_id = n.uid\
 			WHERE gender=? AND preference=? AND city=? AND interests=? AND famerating=?',
-			[tagetgender, gender, city, commontag, famerating],
+			[tagetgender, gender, city, interests, famerating],
 			(error, result) => {
 				if (error) {
 					return reject(error);
 
 
 				}
-				console.log(result)
+				//console.log(result)
 				return resolve(result);
 
 			})

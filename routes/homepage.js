@@ -3,17 +3,23 @@ var router = express.Router();
 var db = require('../model/db');
 var _ = require('lodash');
 
-router.get('/', async function (req, res, next) {
+router.get('/', async function (req, res) {
     try {
+        let users = []
         var id = req.session.GetId;
-        let data = await db.getUsers('Male','Female', 'Randburg', '#gaming',5);
-        res.render('homepage', {userdata: data})
+        let { interests } = await db.getInterest(id);
+        console.log(`interests of mine ${interests}`)
+        req.session.profile = await db.getProfile(id);
+        let { gender, preference, city, famerating } = req.session.profile;
+        console.log(`my gender ${gender}, pref ${preference}, city ${city}, fame ${famerating}`)
+        users[id] = await db.getUsers(gender, preference, city, interests, famerating)
 
+        req.session.users = users[id];
+        res.render('homepage', { userdata: users })
     } catch (error) {
-        console.log('error updating profile ',error.message)
+        console.log('error updating profile ', error.message)
     }
 });
-
 
 router.post('/', async function (req, res) {
     try {
@@ -31,14 +37,14 @@ router.post('/', async function (req, res) {
         if (!req.body.interests) {
             delete options.interests;
         }
-        else if (req.body.interests){
+        else if (req.body.interests) {
             options.interests = `#${options.interests}`;
         }
         if (!req.body.city) {
             delete options.city;
         }
-        console.log(options)
-        console.log("search object",search)
+        //console.log(options)
+        //console.log("search object", search)
         let result = _.filter(search, (item) => {
             if (!options.interests && !options.city) {
                 if ((item.age >= options.min_age && item.age <= options.max_age) &&
