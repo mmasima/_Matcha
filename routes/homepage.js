@@ -5,21 +5,15 @@ var _ = require('lodash');
 
 router.get('/', async function (req, res, next) {
     try {
-        let users = []
         var id = req.session.GetId;
-        let { interests } = await db.getInterest(id);
-        console.log(`interests of mine ${interests}`)
-        req.session.profile = await db.getProfile(id);
-        let { gender, preference, city, famerating } = req.session.profile;
-        console.log(`my gender ${gender}, pref ${preference}, city ${city}, fame ${famerating}`)
-        users[id] = await db.getUsers('Male', 'Female','Johannesburg', '#chess', 5);
-        console.log(users[id])
-        //req.session.users = users[id];
-        res.render('homepage', { userdata: users[id] })
+        let data = await db.getUsers('Male','Female', 'Randburg', '#gaming',5);
+        res.render('homepage', {userdata: data})
+
     } catch (error) {
-        console.log('error updating profile ', error.message)
+        console.log('error updating profile ',error.message)
     }
 });
+
 
 router.post('/', async function (req, res) {
     try {
