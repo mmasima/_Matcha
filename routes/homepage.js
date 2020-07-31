@@ -13,9 +13,9 @@ router.get('/', async function (req, res) {
         let { gender, preference, city, famerating } = req.session.profile;
         console.log(`my gender ${gender}, pref ${preference}, city ${city}, fame ${famerating}`)
         users[id] = await db.getUsers(gender, preference, city, interests, famerating)
-
+        console.log(_.filter(users[id],(users)=>{return users.profileimage !='defprofile.jpg'}))
         req.session.users = users[id];
-        res.render('homepage', { userdata: users })
+        res.render('homepage', { userdata: users[id] })
     } catch (error) {
         console.log('error updating profile ', error.message)
     }
