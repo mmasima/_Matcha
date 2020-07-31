@@ -25,3 +25,5 @@ const upload = multer({
     fileFilter: fileFilter,
 }).single('image');
 
+module.exports = upload;
+

@@ -6,11 +6,11 @@ router.get('/', function(req, res) {
 			const username = req.session.username;
 			req.session.destroy(async (err) => {
 				if (err) console.log(err);
-				res.status(200).render('index');
+				res.redirect('/');
 				res.end();
 			});
-		} else {
-			res.status(200).render('index');
+		} else{
+			res.redirect('/');
 			res.end();
 		}
 	});

@@ -25,7 +25,6 @@ router.post('/', function (req, res) {
       var check = `SELECT * FROM users WHERE username='${username}'`
       con.query(check, function (err, results, fields) {
         if (err) throw err;
-        console.log(results);
         if(results == '') {
           req.flash('message', 'username does not exist');
           res.redirect('login');
@@ -38,9 +37,10 @@ router.post('/', function (req, res) {
 
                 if (username == element.username) {
                   req.session.GetId = results[0].id;
-                  usernameExists = true;
-                  profile_complete = results[0].profile_complete;
-                  verify = results[0].verify;
+                req.session.user = results[0]
+                usernameExists = true;
+                profile_complete = results[0].profile_complete;
+                verify = results[0].verify;
                 }
               });
               if (usernameExists == true && verify == 'yes') {

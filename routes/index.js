@@ -10,7 +10,7 @@ var db = require('../model/db');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-	res.render('index', { 
+	res.render('index', {
 		message: req.flash('message'),
 		success: req.flash('success'),
 	});
@@ -32,23 +32,22 @@ router.post('/', async function (req, res) {
 		if (db.usernameV(username) && db.passwordV(password) && db.emailV(email) && db.firstNameV(name) && db.lastNameV(lastname)) {
 			emailExists = false;
 			usernameExists = false;
-			var check = await db.checkEmailAndUserNameExist(username, email);
-			check.forEach(element => {
-				if (email == element.email) {
-					emailExists = true;
-				}
-				if (username == element.username) {
-					usernameExists = true;
-				}
-			});
-			if (usernameExists == false && emailExists == false) {
-				if (password == confirm) {
-					bcrypt.hash(password, saltRound, function (err, hash) {
-						var token = crypto.randomBytes(64).toString('base64');
-						var sql = `INSERT INTO users (username, name,lastname,email,password,token,verify) 
-							VALUES( '${username}', '${name}','${lastname}' ,'${email}', '${hash}', '${token}','no')`
-						con.query(sql, (err, result) => {
-							if (err) throw err;
+			try {
+				var check = await db.checkEmailAndUserNameExist(username, email);
+				check.forEach(element => {
+					if (email == element.email) {
+						emailExists = true;
+					}
+					if (username == element.username) {
+						usernameExists = true;
+					}
+				});
+				if (usernameExists == false && emailExists == false) {
+					if (password == confirm) {
+						
+							let newPassword = await bcrypt.hash(password, saltRound);
+							var token = crypto.randomBytes(64).toString('base64');
+							let user = await db.insertUserInfo(username, name, lastname, email, newPassword, token);
 							var transporter = nodemailer.createTransport({
 								service: 'gmail',
 								auth: {
@@ -78,36 +77,42 @@ router.post('/', async function (req, res) {
 									res.redirect('/');
 									console.log(error);
 								} else {
-								
+
 									console.log('Email sent: ' + info.response);
 								}
 							})
-						});
-					});
-					req.flash('success', 'A confirmation email has been sent to you!');
-					res.redirect('/');
+							req.flash('success', 'A confirmation email has been sent to you!');
+							res.redirect('/');
 
-				} else {
-					console.log("password not match confirm");
-					req.flash('message', 'passwords do not match confirm');
-					res.redirect('index');
+					} else {
+						console.log("password not match confirm");
+						req.flash('message', 'passwords do not match confirm');
+						res.redirect('/');
+						res.end()
+					}
+				}
+				if (usernameExists == true) {
+					console.log("username already exists");
+					req.flash('message', 'username already exists');
+					res.redirect('/');
 					res.end()
 				}
-			}
-			if (usernameExists == true) {
-				console.log("username already exists");
-				req.flash('message', 'username already exists');
+				if (emailExists == true) {
+					console.log("email exists");
+					req.flash('message', 'email exists');
+					res.redirect('/');
+					res.end
+				}
+				res.render('index');
+				res.end();
+
+			} catch (error) {
+				console.log("error register ", error.message);
+				req.flash("message", "error register");
 				res.redirect('/');
-				res.end()
+
+
 			}
-			if (emailExists == true) {
-				console.log("email exists");
-				req.flash('message', 'email exists');
-				res.redirect('/');
-				res.end
-			}
-			res.render('index');
-			res.end();
 		} else {
 			if (!db.usernameV(username)) {
 				console.log('your username need to be 2 - 20 haracters long and contain at least one lower case alphabet')
