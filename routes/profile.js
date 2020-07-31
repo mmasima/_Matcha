@@ -62,7 +62,7 @@ router.post('/', async function (req, res) {
                 var sql = await db.insertProfile(id, age, gender, preference, bio, city);
                 var insertInterests = await db.insertInterests(id, interests)
                 var profilecomplete = await db.updateProfileComplete(complete, id);
-                await db.insertPicture(id, profileimage);
+                await db.insertPicture(id, profileimage.filename);
                 res.redirect('homepage')
             }
         })
