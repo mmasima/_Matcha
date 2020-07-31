@@ -13,7 +13,7 @@ con.connect(function(err){
 	if(err) throw err;
 	console.log("connect!");
 	//create a database named "mynodedb"
-	con.query("CREATE DATABASE Matcha", function(err,
+	con.query("CREATE DATABASE matcha", function(err,
 		result){
 			if (err) throw err;
 			console.log("Database created");
