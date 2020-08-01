@@ -206,7 +206,7 @@ matcha.getUsers = function (gender, preference, city, interests, famerating) {
 
 
 				}
-				//console.log(result)
+				console.log(result)
 				return resolve(result);
 
 			})
@@ -240,5 +240,19 @@ matcha.getInterest = function (id) {
 			})
 	})
 }
+
+matcha.getUserByUsername = function (username) {
+	return new Promise((resolve, reject) => {
+		con.query(`SELECT * FROM users AS u INNER JOIN profile AS p ON u.id = p.profile_id 
+		INNER JOIN interests AS i ON p.profile_id = i.uid INNER JOIN image AS m ON i.uid = m.img_id
+		WHERE username=?`,
+			[username],
+			(error, result) => {
+				if (error) return reject(error[0]);
+				return resolve(result[0]);
+			})
+	})
+}
+
 
 module.exports = matcha;
