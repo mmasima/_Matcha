@@ -17,6 +17,7 @@ var profileRouter = require('./routes/profile');
 var loginRouter = require('./routes/login');
 var activateAcc = require('./routes/activateAccount');
 var updateProfile = require('./routes/updateProfile');
+var getuserRouter = require('./API/getuser')
 
 var logoutRouter = require('./routes/logout');
 
@@ -75,6 +76,7 @@ app.use('/login', loginRouter);
 app.use('/activateAccount', activateAcc);
 app.use('/updateProfile',sessionFunction, updateProfile);
 app.use('/logout', logoutRouter);
+app.use('/API/getuser',sessionFunction, getuserRouter);
 //app.post('/frgotpsswrd', frgotpsswrdRouter.frgotpsswrd)
 
 

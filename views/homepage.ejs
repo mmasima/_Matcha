@@ -92,7 +92,7 @@
           <tbody>
             <%userdata.forEach(data => {%>
             <img src='/user_images/<%=data.profileimage%>' width="400px" height="250px">
-            <p><%=data.username%></p>
+            <p><a href ="http://localhost:3000/API/getuser/<%=data.username%>"><%=data.username%></a></p>
             <p><%=data.gender%></p>
             <p><%=data.city%></p>
             <p><%=data.biography%></p>
