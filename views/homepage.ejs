@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="stylesheets/style.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
-  <script type="text/javascript" src="../routes/homepage.js"></script>
+    <script type="text/javascript"  src="../routes/homepage.js"></script>
 </head>
 
 <body>
@@ -58,6 +58,7 @@
                 max age <input class="range-slider__range" name="max_age" type="range" min="19" max="100">
                 <span class="range-slider__value">25</span>
               </div> -->
+            </p>
             <p>
             <h5 class="search-label">popularity:</h5>
             <select name="fame">
@@ -72,7 +73,7 @@
                 max fame <input class="range-slider__range" name="max_fame" type="range" min="4" max="6">
                 <span class="range-slider__value">10</span>
               </div> -->
-
+            </p>
             <p><input class="btn btn-outline-primary" type="submit" value="submit"></p>
           </li>
         </form>
@@ -93,49 +94,27 @@
               <label for="">City:</label>
               <p class="card-text"><%=data.city%></p>
               <%if(data.biography){ %>
-              <label for="">bio</label>
+                <label for="">bio</label>
               <p><%=data.biography%></p>
               <%}%>
-                <button id="button" onclick="getProfile(data.username)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">view more</button>
+                <button id="getProfile" onclick="getProfile(data.username)" class="btn btn-primary">view more</button>
             </div>
-              <!-- modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+          <%})%>
         </div>
       </div>
     </div>
-  </div>
-          </div>
-          <%})%>
-            </div>
-          </div>
-        </div>
-  </tbody>\
-
-
-
-
+  </tbody>
 
   <script>
-    function getProfile(username) {
-      console.log('Hello ter!!!!!!');
+    var profile = document.getElementById("getProfile");
+
+    getProfile.onclick = function getProfile(username)  {
       console.log(username);
-    }
+    };
   </script>
 
+  <script src="../routes/homepage.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
     crossorigin="anonymous"></script>
