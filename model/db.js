@@ -195,7 +195,7 @@ matcha.getUsers = function (gender, preference, city, interests, famerating) {
 			tagetgender = preference;
 		}
 
-		con.query('SELECT username,gender, biography, city, profileimage FROM users AS u \
+		con.query('SELECT username,gender ,age, biography, city, profileimage FROM users AS u \
 			INNER JOIN profile AS p ON u.id = p.profile_id INNER JOIN image AS i ON p.profile_id = i.img_id \
 			INNER JOIN interests AS n ON i.img_id = n.uid\
 			WHERE gender=? AND preference=? AND city=? AND interests=? AND famerating=?',

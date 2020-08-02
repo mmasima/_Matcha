@@ -47,8 +47,13 @@
             <%if(data){%>
             <img src='/user_images/<%=data.profileimage%>' width="400px" height="250px">
             <p><%=data.username%></a></p>
-            <p><%=data.gender%></p>
-            <p><%=data.city%></p>
+            <p>name: <%=data.name%> <%=data.lastname%></p>
+            <p> Age: <%=data.age%></p>
+            <p>email: <%=data.email%></p>
+            <p>Gender: <%=data.gender%></p>
+            <p>Preference: <%=data.preference%></p>
+            <p>City: <%=data.city%></p>
+            <p>Interests: <%=data.interests%></p>
             <p><%=data.biography%></p>
             <%}%>
           </tbody>
