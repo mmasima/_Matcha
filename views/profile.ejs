@@ -132,10 +132,6 @@
     <script>
       const SuccessCallback = function (position) {
         console.log(position.coords.longitude);
-        document.getElementById("lat") = position.coords.latitude;
-        document.getElementById("long") = position.coords.longitude;
-        var x = document.getElementById("lat");
-        console.log(x);
       };
       const errorCallback = function (error) {
         console.log(error);
