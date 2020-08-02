@@ -1,85 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>matcha</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>matcha</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+</head>
 
-  <body>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-      <a href="#" class="navbar-brand">matcha</a>
-      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarMenu">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a href="updateProfile"><button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                data-target="#loginModal">
-                update Profile
-              </button></a>
-            <a href="http://localhost:3000/logout"><button type="button" class="btn btn-outline-primary"
-                data-toggle="modal" data-target="#Modal">logout</button></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a href="#" class="navbar-brand">matcha</a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMenu">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a href="updateProfile"><button type="button" class="btn btn-outline-primary" data-toggle="modal"
+              data-target="#loginModal">
+              update Profile
+            </button></a>
+          <a href="http://localhost:3000/logout"><button type="button" class="btn btn-outline-primary"
+              data-toggle="modal" data-target="#Modal">logout</button></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
     
-    <nav class="navbar navbar-light bg-light">
-      <a href="#" class="navbar-brand">search</a>
-      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarMenu">
-        <ul class="navbar-nav ml-auto">
-          <form action="/homepage" method="POST">
-            <li class="nav-item">
-              <input name="interests" type="text" placeholder="interests">
-              <input name="city" type="text" placeholder="city">
-              <p>
-              <h5 class="search-label">Age:</h5>
+ <nav class="navbar navbar-light bg-light">
+    <a href="#" class="navbar-brand">Search, Sort And Filter</a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMenu">
+      <ul class="navbar-nav ml-auto">
+        <form action="/homepage" method="POST">
+          <li class="nav-item">
+            <input name="interests" type="text" placeholder="interests">
+            <input name="city" type="text" placeholder="city">
+            <p>
+            <h5 class="search-label">Age:</h5>
 
-              <select name="age">
-                <option value="18-25">18-25</option>
-                <option value="25-30">25-30</option>
-              </select>
-
-              <!-- <div class="range-slider">
-                min age <input class="range-slider__range" name="min_age" type="range" min="18" max="98">
-                <span class="range-slider__value">20</span>
-              </div>
-              <div class="range-slider">
-                max age <input class="range-slider__range" name="max_age" type="range" min="19" max="100">
-                <span class="range-slider__value">25</span>
-              </div> -->
-              </p>
-              <p>
-              <h5 class="search-label">popularity:</h5>
-              <select name="fame">
-                <option value="0-5">0-5</option>
-                <option value="5-10">5-10</option>
-              </select>
-              <!-- <div class="range-slider">
-                min fame <input class="range-slider__range" name="min_fame" type="range" min="0" max="3">
-                <span class="range-slider__value">5</span>
-              </div>
-              <div class="range-slider">
-                max fame <input class="range-slider__range" name="max_fame" type="range" min="4" max="6">
-                <span class="range-slider__value">10</span>
-              </div> -->
-              </p>
-              <p><input class="btn btn-outline-primary" type="submit" value="submit"></p>
-            </li>
-          </form>
-        </ul>
-      </div>
-    </nav>
+            <select name="age">
+              <option value="0-0">0</option>
+              <option value="18-30">18-30</option>
+              <option value="30-55">30-55</option>
+            </select>
+            </p>
+            <p>
+            <h5 class="search-label">popularity:</h5>
+            <select name="fame">
+              <option value="0-0">0-0</option>
+              <option value="0-5">0-5</option>
+              <option value="5-10">5-10</option>
+            </select>
+            </p>
+            <p>
+             <h5 class="search-label">Filter:</h5>
+             <input type="radio" name="agefilter" value="filterage">
+             <label for="age">age</label>
+             <label for="vol">(between 18 & 60):</label>
+             <input type="range" name="age_value" min="18" max="60"><br>
+             <input type="radio" name="locationfilter" value="filterlocation">
+             <label for="location">location</label>
+             <input name="city_value" type="text" placeholder="city"><br>  
+             <input type="radio" name="interestsfilter" value="filterinterests" >
+             <label for="interests">interests</label>
+             <input name="interests_value" type="text" placeholder="interests"><br>
+             <input type="radio" name="famefilter" value="filterfame">
+             <label for="fame">fame</label>
+             <label for="vol"> (between 5 and 10):</label>
+             <input type="range"name="fame_value" min="5" max="10">
+             <br><br>
+            </p>
+            <h5 class="search-label">Sort:</h5>
+            <select name="sort">
+              <option value="none">none</option>
+              <option value="age">Age</option>
+              <option value="fame">Fame</option>
+              <option value="interest">Interest</option>
+              <option value="location">Location</option>
+            </select>
+            <select name="sort_method">
+              <option value="asc">Asc</option>
+              <option value="desc">Desc</option>
+            </select>
+            <p><input class="btn btn-outline-primary" type="submit" value="submit"></p>
+          </li>
+        </form>
+      </ul>
+    </div>
+  </nav>
+ 
     <%if(message && message.length > 0) {%>
       <div class="alert alert-success" role="alert">
         <%= message %>
@@ -108,15 +124,16 @@
       </div>
     </nav>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-      crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-      crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-      crossorigin="anonymous"></script>
-  </body>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+</body>
 
 </html>

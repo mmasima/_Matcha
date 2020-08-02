@@ -16,6 +16,7 @@ router.get('/:username', async function (req, res) {
     } catch (error) {
         console.log(error)
     }
+    res.render('viewprofile', { message: req.flash('message') });
 });
 
 
