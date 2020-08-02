@@ -10,14 +10,14 @@ router.get('/', async function (req, res) {
         let users = []
         var id = req.session.GetId;
         let { interests } = await db.getInterest(id);
-
         req.session.profile = await db.getProfile(id);
         let { gender, preference, city, famerating } = req.session.profile;
-
         users[id] = await db.getUsers(gender, preference, city, interests, famerating)
-
         req.session.users = users[id];
-        res.render('homepage', { userdata: users[id] })
+        res.render('homepage', { 
+            userdata: users[id],
+            message: req.flash('message'), 
+        });
     } catch (error) {
         console.log('error updating profile ', error.message)
     }
@@ -199,13 +199,15 @@ router.post('/', async function (req, res) {
 
         }
         if (sorted.length == 0 && filtered.length == 0) {
-            return res.render('homepage', { userdata: result });
+            return res.render('homepage', { userdata: result,
+            message: req.flash('message'), });
         } else if (sorted.length > 0 && filtered.length == 0) {
-            return res.render('homepage', { userdata: sorted });
+            return res.render('homepage', { userdata: sorted,
+            message: req.flash('message'), });
         } else if (filtered.length > 0) {
-            return res.render('homepage', { userdata: filtered });
+            return res.render('homepage', { userdata: filtered,
+            message: req.flash('message'), });
         }
-
     } catch (error) {
         console.log('error search ', error.message)
     }
