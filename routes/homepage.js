@@ -8,14 +8,17 @@ router.get('/', async function (req, res) {
         let users = []
         var id = req.session.GetId;
         let { interests } = await db.getInterest(id);
-        console.log(`interests of mine ${interests}`)
+       // console.log(`interests of mine ${interests}`)
         req.session.profile = await db.getProfile(id);
         let { gender, preference, city, famerating } = req.session.profile;
-        console.log(`my gender ${gender}, pref ${preference}, city ${city}, fame ${famerating}`)
+        //console.log(`my gender ${gender}, pref ${preference}, city ${city}, fame ${famerating}`)
         users[id] = await db.getUsers(gender, preference, city, interests, famerating)
-        console.log(_.filter(users[id],(users)=>{return users.profileimage !='defprofile.jpg'}))
+        //console.log(_.filter(users[id],(users)=>{return users.profileimage !='defprofile.jpg'}))
         req.session.users = users[id];
-        res.render('homepage', { userdata: users[id] })
+        res.render('homepage', { 
+            userdata: users[id],
+            message: req.flash('message'), 
+        });
     } catch (error) {
         console.log('error updating profile ', error.message)
     }
@@ -71,7 +74,10 @@ router.post('/', async function (req, res) {
             }
         });
         //console.log(result)
-        res.render('homepage', { userdata: result });
+        res.render('homepage', {
+            userdata: result,
+            message: req.flash('message'),
+        });
     } catch (error) {
         console.log('error search ', error.message)
     }

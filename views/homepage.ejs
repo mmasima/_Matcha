@@ -30,6 +30,7 @@
         </ul>
       </div>
     </nav>
+    
     <nav class="navbar navbar-light bg-light">
       <a href="#" class="navbar-brand">search</a>
       <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
@@ -79,6 +80,11 @@
         </ul>
       </div>
     </nav>
+    <%if(message && message.length > 0) {%>
+      <div class="alert alert-success" role="alert">
+        <%= message %>
+      </div>
+      <%}%>
     <nav class="col-sm table-wrapper-scroll-y my-custom-scrollbar">
       <span class="sort-by">sort by:</span>
       <div class="table-responsive">
