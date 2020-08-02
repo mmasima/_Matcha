@@ -2,19 +2,20 @@ var express = require('express');
 var router = express.Router();
 var db = require('../model/db');
 var _ = require('lodash');
-
+const { sortBy } = require('lodash');
+const { eachOfLimit } = require('async');
 
 router.get('/', async function (req, res) {
     try {
         let users = []
         var id = req.session.GetId;
         let { interests } = await db.getInterest(id);
-        console.log(`interests of mine ${interests}`)
+
         req.session.profile = await db.getProfile(id);
         let { gender, preference, city, famerating } = req.session.profile;
 
         users[id] = await db.getUsers(gender, preference, city, interests, famerating)
-        console.log(_.filter(users[id], (users) => { return users.profileimage != 'defprofile.jpg' }))
+
         req.session.users = users[id];
         res.render('homepage', { userdata: users[id] })
     } catch (error) {
@@ -52,14 +53,9 @@ router.post('/', async function (req, res) {
             delete options.min_fame;
             delete options.max_fame;
         }
-       // delete options.sort
-       // delete options.sort_method
-        console.log(options)
-        //console.log("search object", search)
         let result = _.filter(search, (item) => {
             if ((!options.interests && !options.city) && (!options.min_age && !options.max_age) &&
                 (!options.min_fame && !options.max_fame)) {
-
                 return item;
             }
             else if ((options.interests && !options.city) && (item.age >= options.min_age && item.age <= options.max_age) &&
@@ -80,8 +76,6 @@ router.post('/', async function (req, res) {
             }
             else if ((options.interests && !options.city) && (!options.min_age && !options.max_age) &&
                 (!options.min_fame && !options.max_fame) && (item.interests == options.interests)) {
-                // console.log('interests')
-                //console.log(item.interests)
                 return item;
             }
             else if ((!options.interests && options.city) && (!options.min_age && !options.max_age) &&
@@ -91,12 +85,12 @@ router.post('/', async function (req, res) {
             }
             else if ((!options.interests && !options.city) && (item.age >= options.min_age && item.age <= options.max_age) &&
                 (item.famerating >= options.min_fame && item.famerating <= options.max_fam)) {
-                console.log('here' + item.age)
+                // console.log('here' + item.age)
                 return item;
             }
             else if ((item.age >= options.min_age && item.age <= options.max_age) && (!options.interests && !options.city) &&
                 (!options.min_fame && !options.max_fame)) {
-                console.log('97')
+                // console.log('97')
                 return item;
             }
             else if ((!options.interests && !options.city) && (!options.min_age && !options.max_age) &&
@@ -129,19 +123,89 @@ router.post('/', async function (req, res) {
             }
 
         });
-        let sorted
-        if (options.sort == 'none'){
-
-            return res.render('homepage', {userdata:result})
-        }else if (options.sort == 'age'){
-            if(options.sort_method =='asc'){
-                result.sort
-
+        let sorted = [];
+        if (options.sort == 'none') {
+            //return res.render('homepage', { userdata: result })
+        } else if (options.sort == 'age') {
+            if (options.sort_method == 'asc') {
+                sorted = _.orderBy(result, ['age'], 'asc');
+                // return res.render('homepage', { userdata: sorted });
+            } else {
+                sorted = _.orderBy(result, ['age'], 'desc');
+                //  return res.render('homepage', { userdata: sorted });
+            }
+        } else if (options.sort == 'fame') {
+            if (options.sort_method == 'asc') {
+                sorted = _.orderBy(result, ['fame'], 'asc');
+                //  return res.render('homepage', { userdata: sorted });
+            } else {
+                sorted = _.orderBy(result, ['fame'], 'desc');
+                // return res.render('homepage', { userdata: sorted });
+            }
+        }
+        else if (options.sort == 'interest') {
+            if (options.sort_method == 'asc') {
+                sorted = _.orderBy(result, ['interests'], 'asc');
+                //  return res.render('homepage', { userdata: sorted });
+            } else {
+                sorted = _.orderBy(result, ['interests'], 'desc');
+                //  return res.render('homepage', { userdata: sorted });
             }
 
         }
-        
-        res.render('homepage', { userdata: result });
+        else if (options.sort == 'location') {
+            if (options.sort_method == 'asc') {
+                sorted = _.orderBy(result, ['city'], 'asc');
+                //  return res.render('homepage', { userdata: sorted });
+            } else {
+                sorted = _.orderBy(result, ['city'], 'desc');
+                // return res.render('homepage', { userdata: sorted });
+            }
+        }
+        let filtered = [];
+        console.log('filter')
+        console.log(options)
+        if (options.agefilter == 'filterage') {
+            if (options.sort == 'none') {
+                filtered = _.filter(result, { age: options.age_value })
+            } else {
+                filtered = _.filter(sorted, { age: options.age_value })
+
+            }
+
+        } else if (options.locationfilter == 'filterlocation') {
+            if (options.sort == 'none') {
+                filtered = _.filter(result, { location: options.city_value })
+            } else {
+                filtered = _.filter(sorted, { location: options.city_value })
+
+            }
+
+        } else if (options.interestsfilter == 'filterinterests') {
+            if (options.sort == 'none') {
+                filtered = _.filter(result, { interests: options.age_value })
+            } else {
+                filtered = _.filter(sorted, { interests: options.age_value })
+            }
+
+        } else if (options.famefilter == 'filterfame') {
+            if (options.sort == 'none') {
+                filtered = _.filter(result, { fame: options.fame_value })
+            } else {
+                filtered = _.filter(sorted, { fame: options.fame_value })
+
+            }
+
+
+        }
+        if (sorted.length == 0 && filtered.length == 0) {
+            return res.render('homepage', { userdata: result });
+        } else if (sorted.length > 0 && filtered.length == 0) {
+            return res.render('homepage', { userdata: sorted });
+        } else if (filtered.length > 0) {
+            return res.render('homepage', { userdata: filtered });
+        }
+
     } catch (error) {
         console.log('error search ', error.message)
     }

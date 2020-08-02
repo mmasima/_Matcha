@@ -206,7 +206,7 @@ matcha.getUsers = function (gender, preference, city, interests, famerating) {
 
 
 				}
-				console.log(result)
+				//console.log(result)
 				return resolve(result);
 
 			})
