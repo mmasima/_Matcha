@@ -254,5 +254,16 @@ matcha.getUserByUsername = function (username) {
 	})
 }
 
+matcha.updateUserLocation = function(loc, profile_id) {
+	return new Promise((resolve, reject) => {
+		con.query(`UPDATE profile set latitude=?, longitude=?, city=?, country=?, postal_code=?,region=? WHERE profile_id=?`,
+		[
+			loc.latitude,loc.longitude,loc.country, loc.postal_code,loc.city,loc.region,profile_id
+		],(err, result) => {
+			if (err) return reject(err);
+			return resolve(result);
+		});
+	});
+}
 
 module.exports = matcha;

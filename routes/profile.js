@@ -5,7 +5,7 @@ const session = require('express-session');
 var upload = require('../logic/uploadImage')
 var multer = require("multer");
 var db = require('../model/db')
-
+var fetch = require('node-fetch')
 
 router.get('/', function (req, res, next) {
     res.render('profile', { message: req.flash('message') });
@@ -74,5 +74,31 @@ router.post('/', async function (req, res) {
     }
     
 });
+
+router.post('/location', async (req, res) => {
+    if (req.session.username) {
+      try {
+
+        let loc = {};
+        const location = await fetch(`https://ipinfo.io/?token=9df2c749be0a36`);
+        const location_data = await location.json();
+
+        loc.latitude = location_data.loc.split(',')[0];
+        loc.longitude = location_data.loc.split(',')[1];
+        loc.country = location_data.country;
+        loc.postal_code = location_data.postal;
+        loc.city = location_data.city;
+        loc.region = location_data.region;
+        console.log(loc);
+        await db.updateUserLocation(loc, req.session.GetId);
+        res.status(200).json({ status: true, message: "successful..." });
+      } catch (error) {
+        console.log(error);
+        res.status(200).json({ status: false, message: "an error occured..." });
+      }
+    } else {
+      res.status(401).json({ status: false, message: "You are not logged in..." });
+    }
+  });
 
 module.exports = router;
