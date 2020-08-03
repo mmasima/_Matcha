@@ -12,7 +12,7 @@ var con = mysql.createConnection({
 
 
 
-const usersql = 'CREATE TABLE IF NOT EXISTS users(\
+const usersql = "CREATE TABLE IF NOT EXISTS users(\
 id INT AUTO_INCREMENT PRIMARY KEY, \
 username VARCHAR(255) ,\
 name VARCHAR(255),\
@@ -21,8 +21,10 @@ email VARCHAR(255),\
 password VARCHAR(255),\
 token VARCHAR(255),\
 verify VARCHAR(3),\
-profile_complete VARCHAR(3)\
-)';
+profile_complete VARCHAR(3),\
+block VARCHAR(3) default 'no',\
+fakeaccount VARCHAR(3) default 'no'\
+)";
 
 const profilesql =`CREATE TABLE IF NOT EXISTS profile(\
 profile_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\
