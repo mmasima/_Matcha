@@ -9,7 +9,6 @@ router.get("/:username", async function (req, res) {
   try {
     let user = await db.getUserByUsername(req.params.username);
     global = user;
-    console.log(global);
     res.render("viewprofile", {
       data: user,
     });
@@ -19,28 +18,37 @@ router.get("/:username", async function (req, res) {
   res.render("viewprofile", { message: req.flash("message") });
 });
 
-router.post("/", function (req, res) {
+router.post('/', async function (req, res) {
   if (req.method == "POST") {
     var like = 1;
-    var id = global.id;
+    var likedId = global.id;
+    var MyId = req.session.GetId;
+    try {
 
-    var check = `SELECT * FROM profile WHERE profile_id ='${id}'`;
-    con.query(check, function (err, results, fields) {
-      if (err) throw err;
-      if (results[0].famerating <= 9) {
-          
-        like = like + results[0].famerating;
-        var iLike = `UPDATE profile SET famerating='${like}' where profile_id = '${id}'`;
-        con.query(iLike, (err, result) => {
-          if (err) throw err;
+      let insertLikes = await db.insertLikes(MyId, likedId);
+      console.log(insertLikes);
+
+      var check = `SELECT * FROM profile WHERE profile_id ='${likedId}'`;
+      con.query(check, function (err, results, fields) {
+        if (err) throw err;
+        if (results[0].famerating <= 9) {
+          like = like + results[0].famerating;
+          var iLike = `UPDATE profile SET famerating='${like}' where profile_id = '${likedId}'`;
+          con.query(iLike, (err, result) => {
+            if (err) throw err;
+            req.flash("message", "you liked this person!");
+            res.redirect("/homepage");
+          });
+        } else {
           req.flash("message", "you liked this person!");
           res.redirect("/homepage");
-        });
-      } else {
-        req.flash("message", "you liked this person!");
-        res.redirect("/homepage");
-      }
-    });
+          res.end();
+        }
+      })
+    } catch (error) {
+      console.log("error liking ", error.message);
+      res.redirect('/homepage');
+    }
   }
 });
 

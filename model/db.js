@@ -59,6 +59,7 @@ matcha.insertUserInfo = function (username, name, lastname, email, hash, token) 
 
 }
 
+
 matcha.findUserByToken = function (token) {
 	return new Promise((resolve, reject) => {
 		con.query('SELECT * FROM users WHERE token=?',
@@ -254,16 +255,30 @@ matcha.getUserByUsername = function (username) {
 	})
 }
 
-matcha.updateUserLocation = function(loc, profile_id) {
+matcha.updateUserLocation = function (loc, profile_id) {
 	return new Promise((resolve, reject) => {
 		con.query(`UPDATE profile set latitude=?, longitude=?, city=?, country=?, postal_code=?,region=? WHERE profile_id=?`,
-		[
-			loc.latitude,loc.longitude,loc.country, loc.postal_code,loc.city,loc.region,profile_id
-		],(err, result) => {
-			if (err) return reject(err);
-			return resolve(result);
-		});
+			[
+				loc.latitude, loc.longitude, loc.country, loc.postal_code, loc.city, loc.region, profile_id
+			], (err, result) => {
+				if (err) return reject(err);
+				return resolve(result);
+			});
 	});
+}
+
+matcha.insertLikes = function (I_liked, Person_liked) {
+	return new Promise((resolve, reject) => {
+		con.query('INSERT INTO likes(like_user_id, liked_user_id) VALUES (?,?)',
+			[I_liked, Person_liked],
+			(error, result) => {
+				if (error) {
+					return reject(error);
+				}
+				console.log(result)
+				return resolve(result);
+			})
+	})
 }
 
 module.exports = matcha;

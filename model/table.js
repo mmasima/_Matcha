@@ -24,6 +24,12 @@ verify VARCHAR(3),\
 profile_complete VARCHAR(3)\
 )';
 
+const likesql = `CREATE TABLE IF NOT EXISTS likes(\
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, \
+	like_user_id int(11) NOT NULL,\
+	liked_user_id int(11) NOT NULL,\
+	FOREIGN KEY (like_user_id) REFERENCES users(id))`;
+
 const profilesql =`CREATE TABLE IF NOT EXISTS profile(\
 profile_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\
 age int(11),\
@@ -2112,6 +2118,7 @@ const createTBLs = () => {
 	return new Promise((resolve, reject) => {
 	  con.query(
 		`${usersql};
+		${likesql};
 		${profilesql};
 		${interestsSql};
 		${ImgSql};`		,
