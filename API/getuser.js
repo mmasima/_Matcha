@@ -9,7 +9,6 @@ router.get("/:username", async function (req, res) {
   try {
     let user = await db.getUserByUsername(req.params.username);
     global = user;
-    console.log(global);
     res.render("viewprofile", {
       data: user,
     });
@@ -19,29 +18,37 @@ router.get("/:username", async function (req, res) {
   res.render("viewprofile", { message: req.flash("message") });
 });
 
-router.post("/", function (req, res) {
-  if (req.method == "POST") {
-    var like = 1;
-    var id = global.id;
+router.post("/", async function (req, res) {
 
-    var check = `SELECT * FROM profile WHERE profile_id ='${id}'`;
-    con.query(check, function (err, results, fields) {
-      if (err) throw err;
-      if (results[0].famerating <= 9) {
-          
-        like = like + results[0].famerating;
-        var iLike = `UPDATE profile SET famerating='${like}' where profile_id = '${id}'`;
-        con.query(iLike, (err, result) => {
-          if (err) throw err;
-          req.flash("message", "you liked this person!");
-          res.redirect("/homepage");
-        });
+  var like = 1;
+  var id = global.id;
+  try {
+     var check = await db.getProfile(id)
+    if (req.body.like) {
+      if (check[0].famerating <= 9) {
+        like = like + check[0].famerating;
+        var iLike = await db.updateFame(like, id)
+        req.flash("message", "you liked this person!");
+        res.redirect("/homepage");
       } else {
         req.flash("message", "you liked this person!");
         res.redirect("/homepage");
       }
-    });
+    }else if (req.body.block) {
+      var block = await db.updateBlock(id);
+       req.flash("message", "you blocked this person!");
+        res.redirect("/homepage");
+    }else if(req.body.fakeaccount){
+      var fakeacc = await db.updateFakeAcc(id);
+      req.flash("message", "you reported this person as a fakeaccount!");
+        res.redirect("/homepage");
+    }
+
+  } catch (error) {
+
   }
+
+
 });
 
 module.exports = router;

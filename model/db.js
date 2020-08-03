@@ -198,8 +198,8 @@ matcha.getUsers = function (gender, preference, city, interests, famerating) {
 		con.query('SELECT username,gender ,age, biography, city, profileimage FROM users AS u \
 			INNER JOIN profile AS p ON u.id = p.profile_id INNER JOIN image AS i ON p.profile_id = i.img_id \
 			INNER JOIN interests AS n ON i.img_id = n.uid\
-			WHERE gender=? AND preference=? AND city=? AND interests=? AND famerating=?',
-			[tagetgender, gender, city, interests, famerating],
+			WHERE block=? AND fakeaccount=? AND gender=? AND preference=? AND city=? AND interests=? AND famerating=?',
+			['no','no',tagetgender, gender, city, interests, famerating],
 			(error, result) => {
 				if (error) {
 					return reject(error);
@@ -218,7 +218,9 @@ matcha.getUsers = function (gender, preference, city, interests, famerating) {
 matcha.search = function () {
 	return new Promise((resolve, reject) => {
 		con.query(`SELECT * FROM users AS u INNER JOIN profile AS p ON u.id = p.profile_id 
-		INNER JOIN interests AS i ON p.profile_id = i.uid INNER JOIN image AS m ON i.uid = m.img_id`,
+		INNER JOIN interests AS i ON p.profile_id = i.uid INNER JOIN image AS m ON i.uid = m.img_id
+		WHERE block=? AND fakeaccount=?`,
+			['no', 'no'],
 			(error, result) => {
 				if (error) {
 					return reject(error);
@@ -254,16 +256,51 @@ matcha.getUserByUsername = function (username) {
 	})
 }
 
-matcha.updateUserLocation = function(loc, profile_id) {
+matcha.updateUserLocation = function (loc, profile_id) {
 	return new Promise((resolve, reject) => {
 		con.query(`UPDATE profile set latitude=?, longitude=?, city=?, country=?, postal_code=?,region=? WHERE profile_id=?`,
-		[
-			loc.latitude,loc.longitude,loc.country, loc.postal_code,loc.city,loc.region,profile_id
-		],(err, result) => {
-			if (err) return reject(err);
-			return resolve(result);
-		});
+			[
+				loc.latitude, loc.longitude, loc.country, loc.postal_code, loc.city, loc.region, profile_id
+			], (err, result) => {
+				if (err) return reject(err);
+				return resolve(result);
+			});
 	});
 }
+
+matcha.updateFame = function (like, id) {
+	return new Promise((resolve, reject) => {
+		con.query("UPDATE profile SET famerating=? WHERE profile_id=?",
+			[like, id],
+			(error, result) => {
+				if (error) return reject(error[0]);
+				return resolve(result[0]);
+			})
+	})
+}
+
+
+matcha.updateBlock = function (id) {
+	return new Promise((resolve, reject) => {
+		con.query("UPDATE users SET block=? WHERE id=?",
+			['yes', id],
+			(error, result) => {
+				if (error) return reject(error[0]);
+				return resolve(result[0]);
+			})
+	})
+}
+
+matcha.updateFakeAcc = function (id) {
+	return new Promise((resolve, reject) => {
+		con.query("UPDATE users SET fakeaccount=? WHERE id=?",
+			['yes', id],
+			(error, result) => {
+				if (error) return reject(error[0]);
+				return resolve(result[0]);
+			})
+	})
+}
+
 
 module.exports = matcha;
