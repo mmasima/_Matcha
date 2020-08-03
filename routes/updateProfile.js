@@ -12,7 +12,6 @@ router.get('/', function (req, res, next) {
 
 router.post('/',  function(req, res){
         var id = req.session.GetId;
-        var gender = req.body.gender;
         var age = req.body.age;
         var preference = req.body.SelectPreference;
         var interests = req.body.interests;
@@ -21,11 +20,10 @@ router.post('/',  function(req, res){
         var minAge = 18;
         
         if( minAge > parseInt(age) ){
-            console.log('hello world!!');
             req.flash('message', 'You have to be over 18');
-            res.redirect('profile');
+            res.redirect('updateProfile');
         }
-        if (age == '' && gender == 'Choose...' && preference == 'Choose...' && interests == '' && bio == '' ) {
+        else if (age == '' && preference == 'Choose...' && interests == '' && bio == '' ) {
                 res.status("400");
                 req.flash('message', 'you havent changed anything!');
                 res.redirect('updateProfile');
@@ -38,15 +36,6 @@ router.post('/',  function(req, res){
                     if (err) throw err;
                     console.log(result);
                     console.log('age');
-                })
-            };
-            if (gender != 'Choose...') {
-                console.log(id);
-                var sql = `UPDATE profile SET gender ='${gender}' where profile_id = '${id}'`;
-                con.query(sql, (err, result) => {
-                    if (err) throw err;
-                    console.log(result);
-                    console.log('gender');
                 })
             };
             if (preference != 'Choose...') {
