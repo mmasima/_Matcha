@@ -1,104 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>matcha</title>
     <link rel="stylesheet" href="stylesheets/style.css" />
-    <link
-      rel="stylesheet"z
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
   </head>
 
   <body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
       <a href="http://localhost:3000/homepage" class="navbar-brand">matcha</a>
-      <button
-        class="navbar-toggler"
-        data-toggle="collapse"
-        data-target="#navbarMenu"
-      >
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarMenu">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a href="http://localhost:3000/homepage"
-              ><button
-                type="button"
-                class="btn btn-outline-primary"
-                data-toggle="modal"
-              >
+            <a href="http://localhost:3000/homepage"><button type="button" class="btn btn-outline-primary"
+                data-toggle="modal">
                 home
-              </button></a
-            >
-            <a href="/updateProfile"
-              ><button
-                type="button"
-                class="btn btn-outline-primary"
-                data-toggle="modal"
-                data-target="#loginModal"
-              >
+              </button></a>
+            <a href="/updateProfile"><button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                data-target="#loginModal">
                 update Profile
-              </button></a
-            >
-            <a href="http://localhost:3000/logout"
-              ><button
-                type="button"
-                class="btn btn-outline-primary"
-                data-toggle="modal"
-                data-target="#Modal"
-              >
+              </button></a>
+            <a href="http://localhost:3000/logout"><button type="button" class="btn btn-outline-primary"
+                data-toggle="modal" data-target="#Modal">
                 logout
-              </button></a
-            >
+              </button></a>
           </li>
         </ul>
       </div>
     </nav>
 
- 
+
 
     <%if(data){%>
     <div class="container mt-5">
       <div class="row justify-content-center">
         <div class="col-5-lg">
           <div class="card bg-dark">
-            <img
-              class="card-img-top"
-              src="/user_images/<%=data.profileimage%>"
-              width="400px"
-              height="250px"
-            />
+            <img class="card-img-top" src="/user_images/<%=data.profileimage%>" width="400px" height="250px" />
             <form action="/API/getuser" method="POST">
-            <div class="card-body  text-white">
-              <p class="card-text">username: <%=data.username%></p>
-              <p class="card-text">name: <%=data.name%> <%=data.lastname%></p>
-              <p class="card-text">age: <%=data.age%></p>
-              <p class="card-text">famerating: <%=data.famerating%></p>
-              <p class="card-text">gender: <%=data.gender%></p>
-              <p class="card-text">interests: <%=data.interests%></p> 
-              <p class="card-text">city: <%=data.city%></p>
-              <p class="card-text">country: <%=data.country%></p>
-              <p class="card-text">biography: <%=data.biography%></p>
-              <p class="card-text">status: <%=data.status%></p>
-
-                
-
-                <button onclick="setNotification1()" type="submit" href="#" value="like_user" class="btn btn-primary" name="like">like</button>
-                 <button onclick="setNotification2()" type="submit" value ="block_user" href="#" class="btn btn-danger" name="block">block</button>
-                 <button onclick="setNotification3()" type="submit" value ="fakeacc_user" href="#" class="btn btn-danger" name="fakeaccount">Fakeaccount</button>
-
-              </form>
-            </div>
+              <div class="card-body  text-white">
+                <p class="card-text">username: <%=data.username%></p>
+                <p class="card-text">name: <%=data.name%> <%=data.lastname%></p>
+                <p class="card-text">age: <%=data.age%></p>
+                <p class="card-text">famerating: <%=data.famerating%></p>
+                <p class="card-text">gender: <%=data.gender%></p>
+                <p class="card-text">interests: <%=data.interests%></p>
+                <p class="card-text">city: <%=data.city%></p>
+                <p class="card-text">country: <%=data.country%></p>
+                <p class="card-text">biography: <%=data.biography%></p>
+                <p class="card-text">status: <%=data.status%></p>
+                <%}%> <% if(check.type == 'no') {%>
+                  <button
+                    type="submit"
+                    href="#"
+                    class="btn btn-primary"
+                    name="like"
+                  >
+                    like
+                  </button>
+                  <%}%> <% if(check.type == 'yes') { %>
+                  <button
+                    type="submit"
+                    href="#"
+                    class="btn btn-primary"
+                    name="like"
+                  >
+                    unlike
+                  </button>
+                  <%}%>
+                <button onclick="setNotification2()" type="submit" value="block_user" href="#" class="btn btn-danger"
+                  name="block">block</button>
+                <button onclick="setNotification3()" type="submit" value="fakeacc_user" href="#" class="btn btn-danger"
+                  name="fakeaccount">Fakeaccount</button>
+            </form>
           </div>
         </div>
-
       </div>
+    </div>
     </div>
     <%}%>
 
@@ -111,15 +97,12 @@
       var socket = io();
       var usernamer = req.session.sessionID;
       var name = usernamer;
-
       const sessionFunction = function (req, res, next) {
         var usernamer = req.sessionID;
       };
-
       socket.on("show_notification", function (data) {
         showDesktopNotification(data.title, data.message, data.icon);
       });
-
       function setNotification1() {
         showDesktopNotification(
           "Matcha",
@@ -127,7 +110,6 @@
           "/views/Matcha.png"
         );
       }
-
       function setNotification2() {
         showDesktopNotification(
           "Matcha",
@@ -135,7 +117,6 @@
           "/views/Matcha.png"
         );
       }
-
       function setNotification3() {
         showDesktopNotification(
           "Matcha",
@@ -143,21 +124,17 @@
           "/views/Matcha.png"
         );
       }
-
-
       var Notification =
-      window.Notification ||
+        window.Notification ||
         window.WebNotification ||
         window.mozNotification ||
         window.webkitNotification;
-      Notification.requestPermission(function (permission) {});
-
+      Notification.requestPermission(function (permission) { });
       function requestNotificationPermissions() {
         if (Notification.permission !== "denied") {
-          Notification.requestPermission(function (permission) {});
+          Notification.requestPermission(function (permission) { });
         }
       }
-
       function showDesktopNotification(message, body, icon, sound, timeout) {
         if (!timeout) {
           timeout = 4000;
@@ -186,7 +163,6 @@
         setTimeout(instance.close.bind(instance), timeout);
         return false;
       }
-
       function sendNodeNotification(title, message, icon) {
         socket.emit("new_notification", {
           message: message,
@@ -194,7 +170,7 @@
           icon: icon,
         });
       }
-      </script>
+    </script>
 
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
