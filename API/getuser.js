@@ -43,8 +43,7 @@ router.post('/', async function (req, res) {
         let insertLikes = await db.updateLikes(MyId, likedId, no);
         req.flash("message", "you unliked this person!");
       }
-      else if (checkLike.type == 'no'){ 
-        like = -1;
+      else if (checkLike.type == 'no') { 
         await db.updateLikes(MyId, likedId, yes);
         req.flash("message", "you liked this person!");
       }
