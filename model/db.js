@@ -1,4 +1,5 @@
 var con = require('./connection');
+const { result } = require('lodash');
 
 let matcha = {};
 
@@ -184,6 +185,8 @@ matcha.getProfile = (id) => {
 	})
 }
 
+
+
 matcha.getUsers = function (gender, preference, city, interests, famerating) {
 
 	return new Promise((resolve, reject) => {
@@ -267,10 +270,22 @@ matcha.updateUserLocation = function (loc, profile_id) {
 	});
 }
 
-matcha.insertLikes = function (I_liked, Person_liked) {
+matcha.updateLikes = function (myId, liked_id, type) {
 	return new Promise((resolve, reject) => {
-		con.query('INSERT INTO likes(like_user_id, liked_user_id) VALUES (?,?)',
-			[I_liked, Person_liked],
+		con.query('UPDATE likes set type=? where like_user_id=? and liked_user_id=?',
+			[type, myId, liked_id],
+			(error, result) => {
+				if (error) return reject(error[0]);
+				return resolve(result[0]);
+			});
+	})
+}
+
+
+matcha.insertLikes = function (I_liked, Person_liked, type) {
+	return new Promise((resolve, reject) => {
+		con.query('INSERT INTO likes(like_user_id, liked_user_id, type) VALUES (?,?, ?)',
+			[I_liked, Person_liked, type],
 			(error, result) => {
 				if (error) {
 					return reject(error);
@@ -280,5 +295,20 @@ matcha.insertLikes = function (I_liked, Person_liked) {
 			})
 	})
 }
+
+
+matcha.checkLikes = function (myId, liked_id) {
+	return new Promise((resolve, reject) => {
+		con.query('select * from likes where like_user_id=? and liked_user_id=?',
+			[myId, liked_id],
+			(error, result) => {
+				if (error) return reject(error[0]);
+				return resolve(result[0]);
+			});
+	})
+}
+
+
+
 
 module.exports = matcha;
