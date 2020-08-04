@@ -199,7 +199,7 @@ matcha.getUsers = function (gender, preference, city, interests, famerating) {
 			INNER JOIN profile AS p ON u.id = p.profile_id INNER JOIN image AS i ON p.profile_id = i.img_id \
 			INNER JOIN interests AS n ON i.img_id = n.uid\
 			WHERE block=? AND fakeaccount=? AND gender=? AND preference=? AND city=? AND interests=? AND famerating=?',
-			['no','no',tagetgender, gender, city, interests, famerating],
+			['no', 'no', tagetgender, gender, city, interests, famerating],
 			(error, result) => {
 				if (error) {
 					return reject(error);
@@ -303,10 +303,10 @@ matcha.updateFakeAcc = function (id) {
 }
 
 
-matcha.insertHistory = function (username,view) {
+matcha.insertHistory = function (username, view) {
 	return new Promise((resolve, reject) => {
 		con.query(`INSERT INTO view (viewer,viewed, type) VALUES(?,?,?)`,
-			[username, view,'view'],
+			[username, view, 'view'],
 			(error, result) => {
 				if (error) return reject(error[0]);
 				return resolve(result[0]);
@@ -322,6 +322,42 @@ matcha.getHistory = function (username) {
 				if (error) return reject(error[0]);
 				return resolve(result);
 			})
+	})
+}
+
+matcha.checkLikes = function (myId, liked_id) {
+	return new Promise((resolve, reject) => {
+		con.query('select * from likes where like_user_id=? and liked_user_id=?',
+			[myId, liked_id],
+			(error, result) => {
+				if (error) return reject(error[0]);
+				return resolve(result[0]);
+			});
+	})
+}
+
+matcha.insertLikes = function (I_liked, Person_liked, type) {
+	return new Promise((resolve, reject) => {
+		con.query('INSERT INTO likes(like_user_id, liked_user_id, type) VALUES (?,?, ?)',
+			[I_liked, Person_liked, type],
+			(error, result) => {
+				if (error) {
+					return reject(error);
+				}
+			})
+		console.log(result)
+		return resolve(result);
+	})
+}
+
+matcha.updateLikes = function (myId, liked_id, type) {
+	return new Promise((resolve, reject) => {
+		con.query('UPDATE likes set type=? where like_user_id=? and liked_user_id=?',
+			[type, myId, liked_id],
+			(error, result) => {
+				if (error) return reject(error[0]);
+				return resolve(result[0]);
+			});
 	})
 }
 
