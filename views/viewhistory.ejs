@@ -44,105 +44,15 @@
             class="btn btn-primary">view more</a> <%=interaction.viewer %> viewed your profile </p>
     <%} else if (interaction.type === 'like') {%>
 
-    <p><a onclick="setNotification2()" href="http://localhost:3000/API/getuser/<%=interaction.viewer %>"
+    <p><a onclick="setNotification()" href="http://localhost:3000/API/getuser/<%=interaction.username %>"
             class="btn btn-primary">view more</a>
-        <%=interaction.viewer%> liked your profile
+        <%=interaction.username%> liked your profile
     </p>
     <%}%>
 
   
 <%})%>
     <%}%>
-
-    <script>
-        var express = require("express");
-        var router = express.Router();
-        var db = require("../model/db");
-        var _ = require("lodash");
-        var session = require("express-session");
-        var socket = io();
-        var express = require('express');
-        var router = express.Router();
-        var db = require('../model/db');
-        var interaction = req.session.username;
-        var username = req.session.username;
-  
-        const sessionFunction = function (req, res, next) {
-          var usernamer = req.sessionID;
-        };
-  
-        socket.on("show_notification", function (data) {
-          showDesktopNotification(data.title, data.message, data.icon);
-        });
-  
-        function setNotification() {
-
-          showDesktopNotification(
-            "Matcha",
-            "Your Profile was Viewed !",
-            "/Matcha.png"
-          );
-        }
-
-        function setNotification2() {
-
-        showDesktopNotification(
-          "Matcha",
-          "Your Profile was Liked !",
-          "/Matcha.png"
-        );
-        }
-
-        var Notification =
-          Notification ||
-          WebNotification ||
-          mozNotification ||
-          webkitNotification;
-        Notification.requestPermission(function (permission) {});
-  
-        function requestNotificationPermissions() {
-          if (Notification.permission !== "denied") {
-            Notification.requestPermission(function (permission) {});
-          }
-        }
-  
-        function showDesktopNotification(message, body, icon, sound, timeout) {
-          if (!timeout) {
-            timeout = 4000;
-          }
-          requestNotificationPermissions();
-          var instance = new Notification(message, {
-            body: body,
-            icon: icon,
-            sound: sound,
-          });
-          instance.onclick = function () {
-            // Something to do
-          };
-          instance.onerror = function () {
-            // Something to do
-          };
-          instance.onshow = function () {
-            // Something to do
-          };
-          instance.onclose = function () {
-            // Something to do
-          };
-          if (sound) {
-            instance.sound;
-          }
-          setTimeout(instance.close.bind(instance), timeout);
-          return false;
-        }
-  
-        function sendNodeNotification(title, message, icon) {
-          socket.emit("new_notification", {
-            message: message,
-            title: title,
-            icon: icon,
-          });
-        }
-      </script>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

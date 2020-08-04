@@ -207,15 +207,14 @@
         showDesktopNotification(
           "Matcha",
           "Profile Viewed !",
-          "/views/Matcha.png"
+          "/public/user-images/default1a.jpg"
         );
       }
 
       var Notification =
-        Notification ||
-        WebNotification ||
-        mozNotification ||
-        webkitNotification;
+        window.Notification ||
+        window.mozNotification ||
+        window.webkitNotification;
       Notification.requestPermission(function (permission) {});
 
       function requestNotificationPermissions() {

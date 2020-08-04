@@ -199,7 +199,7 @@ matcha.getUsers = function (gender, preference, city, interests, famerating) {
 			INNER JOIN profile AS p ON u.id = p.profile_id INNER JOIN image AS i ON p.profile_id = i.img_id \
 			INNER JOIN interests AS n ON i.img_id = n.uid\
 			WHERE block=? AND fakeaccount=? AND gender=? AND preference=? AND city=? AND interests=? AND famerating=?',
-			['no', 'no', tagetgender, gender, city, interests, famerating],
+			['no','no',tagetgender, gender, city, interests, famerating],
 			(error, result) => {
 				if (error) {
 					return reject(error);
@@ -260,7 +260,7 @@ matcha.updateUserLocation = function (loc, profile_id) {
 	return new Promise((resolve, reject) => {
 		con.query(`UPDATE profile set latitude=?, longitude=?, city=?, country=?, postal_code=?,region=? WHERE profile_id=?`,
 			[
-				loc.latitude, loc.longitude, loc.city, loc.country, loc.postal_code, loc.region, profile_id
+				loc.latitude, loc.longitude, loc.country, loc.postal_code, loc.city, loc.region, profile_id
 			], (err, result) => {
 				if (err) return reject(err);
 				return resolve(result);
@@ -303,10 +303,10 @@ matcha.updateFakeAcc = function (id) {
 }
 
 
-matcha.insertHistory = function (username, view) {
+matcha.insertHistory = function (username,view) {
 	return new Promise((resolve, reject) => {
 		con.query(`INSERT INTO view (viewer,viewed, type) VALUES(?,?,?)`,
-			[username, view, 'view'],
+			[username, view,'view'],
 			(error, result) => {
 				if (error) return reject(error[0]);
 				return resolve(result[0]);
@@ -325,39 +325,25 @@ matcha.getHistory = function (username) {
 	})
 }
 
-matcha.checkLikes = function (myId, liked_id) {
+matcha.insertLike = function (username,likes) {
 	return new Promise((resolve, reject) => {
-		con.query('select * from likes where like_user_id=? and liked_user_id=?',
-			[myId, liked_id],
+		con.query(`INSERT INTO likes (username,likes, type) VALUES(?,?,?)`,
+			[username,likes,'like'],
 			(error, result) => {
 				if (error) return reject(error[0]);
 				return resolve(result[0]);
-			});
-	})
-}
-
-matcha.insertLikes = function (I_liked, Person_liked, type) {
-	return new Promise((resolve, reject) => {
-		con.query('INSERT INTO likes(like_user_id, liked_user_id, type) VALUES (?,?, ?)',
-			[I_liked, Person_liked, type],
-			(error, result) => {
-				if (error) {
-					return reject(error);
-				}
 			})
-		console.log(result)
-		return resolve(result);
 	})
 }
 
-matcha.updateLikes = function (myId, liked_id, type) {
+matcha.getlikes = function (username) {
 	return new Promise((resolve, reject) => {
-		con.query('UPDATE likes set type=? where like_user_id=? and liked_user_id=?',
-			[type, myId, liked_id],
+		con.query("select * from likes where likes=?",
+			[username],
 			(error, result) => {
 				if (error) return reject(error[0]);
-				return resolve(result[0]);
-			});
+				return resolve(result);
+			})
 	})
 }
 

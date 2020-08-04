@@ -10,12 +10,7 @@ var con = mysql.createConnection({
 	multipleStatements:true
 })
 
-const likesql = `CREATE TABLE IF NOT EXISTS likes(\
-	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, \
-	like_user_id int(11) NOT NULL,\
-	liked_user_id int(11) NOT NULL,\
-	type varchar(4),\
-	FOREIGN KEY (like_user_id) REFERENCES users(id))`;
+
 
 const usersql = "CREATE TABLE IF NOT EXISTS users(\
 id INT AUTO_INCREMENT PRIMARY KEY, \
@@ -64,8 +59,14 @@ FOREIGN KEY (img_id) REFERENCES users(id))`;
 const viewSql = `CREATE TABLE IF NOT EXISTS view(\
 user_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\
 viewer VARCHAR(255),\
-viewed VARCHAR(255),
+viewed VARCHAR(255),\
 type VARCHAR(255))`;
+
+const likeSql = `CREATE TABLE IF NOT EXISTS likes(\
+user_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\
+username VARCHAR(255),\
+likes VARCHAR(255),\
+type VARCHAR(5))`;
 
 let bulkProfilesSeedSql = `INSERT into profile (profile_id,age,status,gender,preference,biography, longitude, latitude, country, postal_code, city, region)
 VALUES
@@ -2126,10 +2127,10 @@ const createTBLs = () => {
 	  con.query(
 		`${usersql};
 		${profilesql};
-		${likesql};
 		${interestsSql};
 		${ImgSql};
-		${viewSql};`		,
+		${viewSql};
+		${likeSql};`		,
 		(error, result) => {
 		  if (error) {
 			return reject(error);
