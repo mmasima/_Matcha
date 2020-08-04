@@ -10,7 +10,12 @@ var con = mysql.createConnection({
 	multipleStatements:true
 })
 
-
+const likesql = `CREATE TABLE IF NOT EXISTS likes(\
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, \
+	like_user_id int(11) NOT NULL,\
+	liked_user_id int(11) NOT NULL,\
+	type varchar(4),\
+	FOREIGN KEY (like_user_id) REFERENCES users(id))`;
 
 const usersql = "CREATE TABLE IF NOT EXISTS users(\
 id INT AUTO_INCREMENT PRIMARY KEY, \
@@ -2121,6 +2126,7 @@ const createTBLs = () => {
 	  con.query(
 		`${usersql};
 		${profilesql};
+		${likesql};
 		${interestsSql};
 		${ImgSql};
 		${viewSql};`		,
