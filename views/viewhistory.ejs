@@ -44,7 +44,7 @@
             class="btn btn-primary">view more</a> <%=interaction.viewer %> viewed your profile </p>
     <%} else if (interaction.type === 'like') {%>
 
-    <p><a onclick="setNotification()" href="http://localhost:3000/API/getuser/<%=interaction.viewer %>"
+    <p><a onclick="setNotification2()" href="http://localhost:3000/API/getuser/<%=interaction.viewer %>"
             class="btn btn-primary">view more</a>
         <%=interaction.viewer%> liked your profile
     </p>
@@ -83,7 +83,16 @@
             "/Matcha.png"
           );
         }
-  
+
+        function setNotification2() {
+
+        showDesktopNotification(
+          "Matcha",
+          "Your Profile was Liked !",
+          "/Matcha.png"
+        );
+        }
+
         var Notification =
           Notification ||
           WebNotification ||
