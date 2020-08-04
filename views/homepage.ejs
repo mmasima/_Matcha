@@ -37,6 +37,16 @@
                 update Profile
               </button></a
             >
+             <a href="viewhistory"
+              ><button
+                type="button"
+                class="btn btn-outline-primary"
+                data-toggle="modal"
+                data-target="#loginModal"
+              >
+              viewhistory
+              </button></a
+            >
             <a href="http://localhost:3000/logout"
               ><button
                 type="button"
@@ -197,14 +207,15 @@
         showDesktopNotification(
           "Matcha",
           "Profile Viewed !",
-          "/public/user-images/default1a.jpg"
+          "/views/Matcha.png"
         );
       }
 
       var Notification =
-        window.Notification ||
-        window.mozNotification ||
-        window.webkitNotification;
+        Notification ||
+        WebNotification ||
+        mozNotification ||
+        webkitNotification;
       Notification.requestPermission(function (permission) {});
 
       function requestNotificationPermissions() {
