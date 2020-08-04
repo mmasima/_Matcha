@@ -56,6 +56,12 @@ image4 varchar(255),\
 profileimage varchar(255),\
 FOREIGN KEY (img_id) REFERENCES users(id))`;
 
+const viewSql = `CREATE TABLE IF NOT EXISTS view(\
+user_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,\
+viewer VARCHAR(255),\
+viewed VARCHAR(255),
+type VARCHAR(255))`;
+
 let bulkProfilesSeedSql = `INSERT into profile (profile_id,age,status,gender,preference,biography, longitude, latitude, country, postal_code, city, region)
 VALUES
 (1,18,'offline','Female','Male','so out there',28.0012,-26.0941,'South Africa',2032,'Johannesburg','Gauteng'),
@@ -2116,7 +2122,8 @@ const createTBLs = () => {
 		`${usersql};
 		${profilesql};
 		${interestsSql};
-		${ImgSql};`		,
+		${ImgSql};
+		${viewSql};`		,
 		(error, result) => {
 		  if (error) {
 			return reject(error);

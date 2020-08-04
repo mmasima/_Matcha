@@ -303,4 +303,26 @@ matcha.updateFakeAcc = function (id) {
 }
 
 
+matcha.insertHistory = function (username,view) {
+	return new Promise((resolve, reject) => {
+		con.query(`INSERT INTO view (viewer,viewed, type) VALUES(?,?,?)`,
+			[username, view,'view'],
+			(error, result) => {
+				if (error) return reject(error[0]);
+				return resolve(result[0]);
+			})
+	})
+}
+
+matcha.getHistory = function (username) {
+	return new Promise((resolve, reject) => {
+		con.query("select * from view where viewed=?",
+			[username],
+			(error, result) => {
+				if (error) return reject(error[0]);
+				return resolve(result);
+			})
+	})
+}
+
 module.exports = matcha;

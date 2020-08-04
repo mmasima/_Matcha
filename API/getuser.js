@@ -7,15 +7,22 @@ var global;
 /* GET home page. */
 router.get("/:username", async function (req, res) {
   try {
-    let user = await db.getUserByUsername(req.params.username);
+    var username = req.session.username;
+    var viewed = req.params.username
+    console.log('me'+username)
+    console.log('yes'+viewed)
+    let user = await db.getUserByUsername(viewed);
+    // await db.insertHistory(username, viewed)
     global = user;
     res.render("viewprofile", {
       data: user,
     });
+    let view = await db.insertHistory(username,viewed)
+   console.log('seee'+view)
   } catch (error) {
     console.log(error);
   }
-  res.render("viewprofile", { message: req.flash("message") });
+  //res.render("viewprofile", { message: req.flash("message") });
 });
 
 router.post("/", async function (req, res) {
