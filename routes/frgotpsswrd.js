@@ -66,8 +66,7 @@ router.post('/', function(req,res){
 										console.log("email doesn't exists");
 										console.log(error);
 									} else {
-                    console.log('Email sent: ' + info.response);
-      
+                          console.log('Email sent: ' + info.response);
 									}
                 })
               })

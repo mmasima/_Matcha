@@ -158,13 +158,11 @@
     <div class="container mt-5">
       <%userdata.forEach(data => {%>
       <div class="row justify-content-center">
-        <div class="col-5-lg mt-5">
+        <div class="col-lg-5 mt-5">
           <div class="card bg-dark text-white">
             <img
               class="card-img-top"
               src="/user_images/<%=data.profileimage%>"
-              width="400px"
-              height="250px"
             />
             <div class="card-body">
               <h5 class="card-title">Username: <%=data.username%></h5>

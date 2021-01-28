@@ -7,7 +7,6 @@ var token;
 /*get*/
 router.get('/', async function (req, res) {
     try {
-    
         token = decodeURIComponent(req.query.token);
         if (token) {
             let user = await db.findUserByToken(token);
