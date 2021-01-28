@@ -298,10 +298,6 @@
 
 <h3> Front-End: </h3>
 
-```diff
-# React part of the app resposible for user interface
-```
-
 - components
    - auth
    - bio
