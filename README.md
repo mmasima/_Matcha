@@ -321,3 +321,38 @@
    - App.css
    - App.js
      
+<h3> Back-End: </h3>
+
+```diff
++ End Points where front-end request are processed e.g inserting user to database
+```
+
+ - controllers
+   - GetData.js
+   - Interations.js
+   - Upload.js
+   - Update.js
+   - Messages.js
+   - Register.js
+
+```diff
++ port at which front-end runs
+```
+
+ - port
+   
+```diff
++ Connects app to database and allows data to be inserted and fetched from database
+```
+
+ - server.js
+   
+```diff
++ Sends mail to user for registration and password reset
+```
+
+ - mailer.js
+ 
+```diff
++ hides api keys from github
+```
