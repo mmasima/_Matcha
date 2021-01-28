@@ -24,7 +24,7 @@
 
 <hr />
 
-<h2> Features :movie_camera: :camera: :floppy_disk: :video_camera:</h2>  
+<h2> Features</h2>  
 
 ```
 - Registration and Signing-in
