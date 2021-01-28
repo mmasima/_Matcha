@@ -70,25 +70,25 @@
     <li>
       <em>
         <strong>
-          leaflet && react-leaflet:
+          Socket.io
         </strong>
        </em>
     </li>
     
 ```diff
-# map display
+# enables real-time, bidirectional and event-based communication between the browser and the server
 ```
     
    <li>
       <em>
         <strong>
-          moment:
+          connect-flash
         </strong>
        </em>
     </li>
     
 ```diff
-# time conversion
+# ensuring that the message is available to the next page that is to be rendered.
 ```
   
 <hr />
