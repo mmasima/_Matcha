@@ -17,7 +17,8 @@
  ```diff
  This project is about creating a dating website.
  The app allows two potential lovers to meet, from the registration to the final encounter.
- A user is able to register, connect, fill his or her profile, search and look into the profile of other users, like them, chat with those that "liked" back.
+ A user is able to register, connect, fill his or her profile, search and look into the profile 
+ of other users, like them, chat with those that "liked" back.
 ```
 
 
@@ -25,7 +26,7 @@
 
 <h2> Features :movie_camera: :camera: :floppy_disk: :video_camera:</h2>  
 
-```diff
+```
 - Registration and Signing-in
 - User profile
 - Browsing
@@ -36,7 +37,7 @@
 ```
 <hr />
 
-<h2> Stack || Languages :speech_balloon: :thought_balloon:</h2> 
+<h2> Stack || Languages</h2> 
 
 <h3> Front-End: </h3>
 
