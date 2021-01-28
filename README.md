@@ -90,56 +90,6 @@
 ```diff
 # time conversion
 ```
-
-   <li>
-      <em>
-        <strong>
-          react-redux:
-        </strong>
-       </em>
-    </li>
-
-```diff
-# connecting redux to react app
-```
-
-   <li>
-      <em>
-        <strong>
-          react-router-dom:
-        </strong>
-       </em>
-    </li>
-    
-```diff
-# front-end routing e.g "/dashboad"
-```
-
-  <li>
-      <em>
-        <strong>
-          react-scroll-to-bottom:
-        </strong>
-       </em>
-    </li>
-    
-```diff
-# provides a scrollbar component
-```
-
-   <li>
-      <em>
-        <strong>
-          redux:
-        </strong>
-       </em>
-    </li>
-    
-```diff
-# global state of an application
-```
-
-  </ul>
   
 <hr />
 
@@ -275,7 +225,7 @@
     </li>
     
 ```diff
-# postgres database stores information of all users
+# Mysql database stores information of all users
 ```
 
 <li>
