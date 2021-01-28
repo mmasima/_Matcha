@@ -15,11 +15,11 @@
 <h2> Description </h2>
 
  ```diff
- + This project is about creating a dating website.
- + The app allows two potential lovers to meet, from the registration to the final encounter.
- + A user is able to register, connect, fill his or her profile, search and look into the profile of other users, like them, chat with those that "liked" back.
+ This project is about creating a dating website.
+ The app allows two potential lovers to meet, from the registration to the final encounter.
+ A user is able to register, connect, fill his or her profile, search and look into the profile of other users, like them, chat with those that "liked" back.
 ```
-:couple_with_heart: :heart: :love_letter: :lips: :couple:
+
 
 <hr />
 
@@ -42,8 +42,6 @@
 
 ```diff
 # JavaScript (ES6+)
-# React JS
-# Redux
 # HTML
 # CSS
 # Bootstrap
